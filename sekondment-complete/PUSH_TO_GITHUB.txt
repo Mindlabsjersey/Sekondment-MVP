@@ -1,0 +1,13 @@
+# Run these two commands in the sekondment-v1 folder on your machine.
+# This overwrites whatever was previously on GitHub with the complete build.
+
+git remote add origin https://github.com/Mindlabsjersey/sekondment-v1.git
+git push -u origin main --force
+
+# If the remote already exists and you get an error on the first line, run this instead:
+# git remote set-url origin https://github.com/Mindlabsjersey/sekondment-v1.git
+# git push -u origin main --force
+
+# After push completes, open Devin and point it at:
+# https://github.com/Mindlabsjersey/sekondment-v1
+# Then start Claude inside Devin and paste HANDOFF.md as the first message.

@@ -1,0 +1,117 @@
+{
+  "project": "Sekondment",
+  "stack": [
+    "Next.js 15",
+    "React 19",
+    "TypeScript",
+    "Supabase",
+    "Stripe Connect",
+    "Tailwind",
+    "Vercel",
+    "Resend"
+  ],
+  "account_types": [
+    "business",
+    "expert",
+    "employer_partner",
+    "admin"
+  ],
+  "metrics": {
+    "source_files": 116,
+    "pages": 30,
+    "api_routes": 5,
+    "migrations": 25
+  },
+  "migrations_in_order": [
+    "0001_core_schema.sql",
+    "0002_marketplace.sql",
+    "0003_payments.sql",
+    "0004_rls.sql",
+    "0005_enum_additions.sql",
+    "0006_partners_rates_proposals.sql",
+    "0007_rls_partners_proposals.sql",
+    "0008_realtime_messages.sql",
+    "0009_opportunity_visibility.sql",
+    "0010_expert_visibility.sql",
+    "0011_notifications.sql",
+    "0012_files_and_boards.sql",
+    "0013_global_currency_country.sql",
+    "0014_terms_agreements.sql",
+    "0015_milestone_releasing_enum.sql",
+    "0016_security_hardening.sql",
+    "0017_account_moderation.sql",
+    "0018_global_fields.sql",
+    "0019_contracts_compliance.sql",
+    "0020_expertise_engine.sql",
+    "0021_expertise_seed.sql",
+    "0022_capacity_marketplace.sql"
+  ],
+  "routes": [
+    "/",
+    "/admin/analytics",
+    "/admin/compliance",
+    "/admin/disputes",
+    "/admin/flagged",
+    "/admin/ledger",
+    "/admin/users",
+    "/admin/verification",
+    "/browse/experts",
+    "/browse/opportunities",
+    "/capacity",
+    "/dashboard",
+    "/engagements",
+    "/engagements/[id]",
+    "/experts",
+    "/experts/[id]",
+    "/messages",
+    "/messages/[id]",
+    "/onboarding",
+    "/opportunities",
+    "/opportunities/[id]",
+    "/opportunities/new",
+    "/partner",
+    "/saved",
+    "/settings",
+    "/settings/payments",
+    "/sign-in",
+    "/sign-up",
+    "/sign-up/check-email",
+    "/terms"
+  ],
+  "unit_tested": [
+    "src/lib/matching/engine.ts",
+    "src/lib/stripe/escrow.ts",
+    "src/lib/messaging/filter.ts"
+  ],
+  "static_checks": {
+    "real_type_errors": 0,
+    "broken_imports": 0,
+    "missing_use_server": 0,
+    "missing_use_client": 0,
+    "enum_migrations_isolated": true,
+    "realtime_publication_guarded": true
+  },
+  "known_hurdles": [
+    "First npm run build will surface real errors (never compiled against deps)",
+    "supabase_realtime publication may pre-exist; add table could conflict",
+    "bg-white on ~26 public files won't dark-theme (cosmetic)",
+    "RLS column-guards silently revert (by design, no error thrown)",
+    "Stripe Connect test setup required before payment flow works"
+  ],
+  "not_built": [
+    "CV->expertise extraction",
+    "versioned engagement_terms editor + 3-party acceptance",
+    "admin dispute/activity/stripe-ref detail pages",
+    "capacity booking auto-engagement",
+    "country/proven-badges on public profiles"
+  ],
+  "needs_desktop_to_verify": [
+    "npm install / lint / build",
+    "live Supabase + migrations + RLS",
+    "Stripe test flow",
+    "Realtime features",
+    "Resend email"
+  ],
+  "config_complete": true,
+  "prompt5": "expertise graph expansion, CV intelligence deepened, marketplace intelligence dashboard, AI-ready analytics"
+}

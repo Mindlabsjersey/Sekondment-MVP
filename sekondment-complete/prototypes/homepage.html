@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sekondment — Deploy Expertise, Not Headcount</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Spline+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0c1f1a;            /* deep evergreen-black */
+    --paper:#f6f3ec;          /* warm off-white */
+    --paper-2:#efe9dd;
+    --moss:#1f4d3f;           /* primary brand */
+    --moss-2:#2d6a55;
+    --sand:#c9a86a;           /* refined gold accent */
+    --line:rgba(12,31,26,.12);
+    --muted:#5a6b63;
+    --shadow:0 1px 2px rgba(12,31,26,.06),0 12px 40px -12px rgba(12,31,26,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Spline Sans',system-ui,sans-serif;
+    background:var(--paper);color:var(--ink);
+    -webkit-font-smoothing:antialiased;line-height:1.5;
+    overflow-x:hidden;
+  }
+  .serif{font-family:'Fraunces',Georgia,serif;font-weight:500;letter-spacing:-.01em}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+
+  /* grain + atmosphere */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
+      background:rgba(246,243,236,.82);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces';font-weight:600;font-size:21px;letter-spacing:-.02em}
+  .logo .mark{width:26px;height:26px;border-radius:7px;background:var(--moss);
+    position:relative;flex:none}
+  .logo .mark::after{content:"";position:absolute;inset:7px 7px auto auto;width:8px;height:8px;border-radius:2px;background:var(--sand)}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-links a{color:var(--ink);text-decoration:none;font-size:15px;font-weight:500;opacity:.78;transition:opacity .2s}
+  .nav-links a:hover{opacity:1}
+  .btn{font-family:inherit;font-size:15px;font-weight:500;border:none;cursor:pointer;
+    border-radius:10px;padding:11px 20px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .15s,box-shadow .2s,background .2s}
+  .btn-primary{background:var(--moss);color:#fff}
+  .btn-primary:hover{background:var(--moss-2);transform:translateY(-1px);box-shadow:var(--shadow)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{background:var(--paper-2)}
+  @media(max-width:760px){.nav-links{display:none}}
+
+  /* HERO */
+  header{position:relative;padding:88px 0 64px;z-index:2}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:500;
+    letter-spacing:.04em;text-transform:uppercase;color:var(--moss);
+    background:rgba(31,77,63,.08);padding:7px 14px;border-radius:100px;margin-bottom:26px}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--moss);box-shadow:0 0 0 4px rgba(31,77,63,.15)}
+  h1.hero{font-family:'Fraunces';font-weight:500;font-size:clamp(44px,7vw,82px);line-height:1.02;letter-spacing:-.03em;max-width:14ch}
+  h1.hero em{font-style:italic;color:var(--moss)}
+  .sub{font-size:clamp(17px,2vw,21px);color:var(--muted);max-width:52ch;margin:28px 0 38px;line-height:1.55}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+  .btn-lg{padding:15px 26px;font-size:16px;border-radius:12px}
+
+  .trust-strip{display:flex;gap:30px;flex-wrap:wrap;margin-top:54px;padding-top:30px;border-top:1px solid var(--line)}
+  .trust-item{display:flex;flex-direction:column;gap:3px}
+  .trust-item .n{font-family:'Fraunces';font-size:30px;font-weight:600;letter-spacing:-.02em}
+  .trust-item .l{font-size:13.5px;color:var(--muted)}
+
+  /* floating profile card */
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.float-card{display:none}}
+  .float-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow);position:relative}
+  .float-card::before{content:"VERIFIED";position:absolute;top:24px;right:24px;font-size:10.5px;font-weight:600;letter-spacing:.08em;color:var(--moss);background:rgba(31,77,63,.1);padding:5px 10px;border-radius:6px}
+  .fc-top{display:flex;gap:14px;align-items:center;margin-bottom:18px}
+  .fc-av{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,var(--moss),var(--moss-2));flex:none}
+  .fc-name{font-family:'Fraunces';font-size:18px;font-weight:600}
+  .fc-role{font-size:13.5px;color:var(--muted)}
+  .fc-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .tag{font-size:12.5px;padding:5px 11px;border-radius:7px;background:var(--paper-2);color:var(--ink);font-weight:500}
+  .fc-score{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--line)}
+  .fc-score .lbl{font-size:13px;color:var(--muted)}
+  .score-bar{width:120px;height:7px;border-radius:100px;background:var(--paper-2);overflow:hidden;position:relative}
+  .score-bar span{position:absolute;inset:0;width:94%;background:linear-gradient(90deg,var(--moss),var(--sand));border-radius:100px}
+  .fc-score .val{font-family:'Fraunces';font-weight:600;font-size:17px}
+
+  /* SECTIONS */
+  section{position:relative;z-index:2;padding:84px 0}
+  .sec-head{max-width:60ch;margin-bottom:52px}
+  .sec-head .eyebrow{margin-bottom:18px}
+  h2{font-family:'Fraunces';font-weight:500;font-size:clamp(30px,4vw,46px);letter-spacing:-.025em;line-height:1.08}
+  h2 em{font-style:italic;color:var(--moss)}
+  .sec-head p{color:var(--muted);font-size:18px;margin-top:18px;line-height:1.55}
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:860px){.cards{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px;transition:transform .2s,box-shadow .25s}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .card .ic{width:46px;height:46px;border-radius:12px;background:rgba(31,77,63,.09);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+  .card .ic svg{width:23px;height:23px;stroke:var(--moss);fill:none;stroke-width:1.7}
+  .card h3{font-family:'Fraunces';font-weight:600;font-size:20px;margin-bottom:9px;letter-spacing:-.01em}
+  .card p{color:var(--muted);font-size:15px;line-height:1.55}
+
+  /* secondment band */
+  .band{background:var(--ink);color:var(--paper);border-radius:28px;padding:64px 56px;position:relative;overflow:hidden}
+  .band::after{content:"";position:absolute;right:-80px;top:-80px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,106,.25),transparent 70%)}
+  .band .eyebrow{background:rgba(201,168,106,.16);color:var(--sand)}
+  .band .eyebrow .dot{background:var(--sand);box-shadow:0 0 0 4px rgba(201,168,106,.22)}
+  .band h2{color:var(--paper);max-width:18ch}
+  .band h2 em{color:var(--sand)}
+  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px}
+  @media(max-width:860px){.band{padding:44px 28px}.flow{grid-template-columns:1fr 1fr}}
+  .step{position:relative}
+  .step .num{font-family:'Fraunces';font-size:14px;color:var(--sand);font-weight:600;margin-bottom:10px}
+  .step .t{font-weight:600;font-size:16px;margin-bottom:5px}
+  .step .d{font-size:14px;color:rgba(246,243,236,.62);line-height:1.5}
+
+  /* CTA */
+  .final{text-align:center;padding:96px 0}
+  .final h2{max-width:20ch;margin:0 auto}
+  .final p{max-width:46ch;margin:18px auto 34px}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;position:relative;z-index:2}
+  .foot-in{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:14px}
+
+  .reveal{opacity:0;transform:translateY(16px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .d1{animation-delay:.05s}.d2{animation-delay:.13s}.d3{animation-delay:.22s}.d4{animation-delay:.3s}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <div class="logo"><span class="mark"></span>Sekondment</div>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#experts">For Experts</a>
+      <a href="#secondment">Company-to-Company</a>
+      <a href="#" class="btn btn-ghost">Sign in</a>
+    </div>
+    <a href="#" class="btn btn-primary" style="display:none">Get started</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow reveal d1"><span class="dot"></span>Trusted expertise marketplace</span>
+      <h1 class="hero serif reveal d2">Access expertise <em>on demand.</em></h1>
+      <p class="sub reveal d3">Connect with verified experts, advisors, consultants and specialists through secure, milestone-based engagements. Deploy expertise — not headcount.</p>
+      <div class="cta-row reveal d4">
+        <a href="#" class="btn btn-primary btn-lg">Find Expertise →</a>
+        <a href="#" class="btn btn-ghost btn-lg">Become an Expert</a>
+      </div>
+      <div class="trust-strip reveal d4">
+        <div class="trust-item"><span class="n serif">Escrow</span><span class="l">Funds held & released per milestone</span></div>
+        <div class="trust-item"><span class="n serif">0–100</span><span class="l">Trust Score on every profile</span></div>
+        <div class="trust-item"><span class="n serif">15%</span><span class="l">Flat platform fee, no surprises</span></div>
+      </div>
+    </div>
+    <div class="float-card reveal d3">
+      <div class="fc-top">
+        <div class="fc-av"></div>
+        <div><div class="fc-name">Fractional CMO</div><div class="fc-role">Available from next week · Remote</div></div>
+      </div>
+      <div class="fc-meta">
+        <span class="tag">Growth Strategy</span><span class="tag">B2B SaaS</span><span class="tag">Fractional</span>
+      </div>
+      <div class="fc-score">
+        <span class="lbl">Trust Score</span>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="score-bar"><span></span></div>
+          <span class="val">94</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow"><span class="dot"></span>Built on trust</span>
+      <h2>Everything happens <em>on-platform.</em></h2>
+      <p>From first message to final payment, every engagement is verified, protected and milestone-based — so businesses and experts can transact with confidence.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7l8-4z"/></svg></div>
+        <h3>Verified, every time</h3>
+        <p>Identity, company and certification checks on both sides, surfaced as a single Trust Score you can filter and rank by.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h12"/></svg></div>
+        <h3>Milestone escrow</h3>
+        <p>Businesses fund work upfront. Funds are held securely and released only as each milestone is approved.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+        <h3>Outcome-first matching</h3>
+        <p>Tell us what you're trying to achieve. We surface the expertise that delivers the outcome — not just the keywords.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="secondment">
+  <div class="wrap">
+    <div class="band">
+      <span class="eyebrow"><span class="dot"></span>The differentiator</span>
+      <h2>Deploy your team's <em>spare capacity.</em></h2>
+      <p style="color:rgba(246,243,236,.7);max-width:54ch;margin-top:18px;font-size:18px;line-height:1.55">
+        Have an expert with bandwidth? Deploy them through Sekondment while they stay on your payroll. Your business earns the revenue — Sekondment facilitates and protects the engagement.</p>
+      <div class="flow">
+        <div class="step"><div class="num">01</div><div class="t">List your expert</div><div class="d">Create a profile for an employee with spare capacity.</div></div>
+        <div class="step"><div class="num">02</div><div class="t">Get matched</div><div class="d">A client business engages their expertise.</div></div>
+        <div class="step"><div class="num">03</div><div class="t">They stay employed</div><div class="d">Your expert never leaves your business.</div></div>
+        <div class="step"><div class="num">04</div><div class="t">You earn</div><div class="d">Revenue routes to your business, securely.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experts">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow"><span class="dot"></span>For experts</span>
+      <h2>Opportunities to <em>deploy expertise.</em></h2>
+      <p>Set your availability, name your rate, and engage with client businesses on secure terms. No bidding wars, no race to the bottom — just outcome-focused work.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg></div>
+        <h3>Availability engine</h3>
+        <p>Available now, from a date, fractional, advisory or project-only — businesses filter to exactly what you offer.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3>Reliable, protected pay</h3>
+        <p>Every engagement is funded into escrow before you start. Milestones release automatically on approval.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1-6.3-4.6L5.7 21 8 13.9 2 9.4h7.6z"/></svg></div>
+        <h3>Reputation that compounds</h3>
+        <p>Two-sided reviews and repeat engagements build a Trust Score that wins you better work over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2 class="serif">Deploy expertise. <em>Not headcount.</em></h2>
+    <p class="sub" style="margin-left:auto;margin-right:auto">Join the trusted marketplace where businesses access verified expertise — and experts find work worth doing.</p>
+    <div class="cta-row" style="justify-content:center">
+      <a href="#" class="btn btn-primary btn-lg">Find Expertise →</a>
+      <a href="#" class="btn btn-ghost btn-lg">Become an Expert</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <div class="logo" style="font-size:18px"><span class="mark"></span>Sekondment</div>
+    <div>© 2026 Sekondment · A trusted business-to-business expertise network</div>
+  </div>
+</footer>
+
+</body>
+</html>

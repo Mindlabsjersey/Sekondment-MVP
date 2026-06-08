@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Spline+Sans:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* brand spine — fixed across light/dark */
+    --c-blue: #1d4ed8;
+    --c-blue-bright: #2563eb;
+    --c-blue-deep: #1e3a8a;
+    --c-gold: #c8a24a;
+    --c-gold-bright: #e0b454;
+
+    /* light mode surfaces */
+    --c-bg: #ffffff;
+    --c-surface: #f7f8fa;
+    --c-surface2: #eef1f5;
+    --c-text: #0f1419;
+    --c-muted: #5b6573;
+    --line: rgba(15, 20, 25, 0.10);
+    --shadow-soft: 0 1px 2px rgba(15,30,60,.06), 0 14px 40px -16px rgba(15,30,60,.22);
+
+    /* industry accents (light tints) */
+    --ind-technology: #4f6bed;  --ind-technology-tint: #eef1fe;
+    --ind-finance: #2f8f6b;     --ind-finance-tint: #e9f5f0;
+    --ind-marketing: #c2557a;   --ind-marketing-tint: #fbecf1;
+    --ind-legal: #7c5cc4;       --ind-legal-tint: #f1ecfa;
+    --ind-creative: #c08a3e;    --ind-creative-tint: #f8f0e4;
+    --ind-operations: #2e8aa0;  --ind-operations-tint: #e8f4f7;
+    --ind-healthcare: #c75f52;  --ind-healthcare-tint: #fbeeec;
+    --ind-people: #5a7a9e;      --ind-people-tint: #eef2f7;
+  }
+
+  .dark {
+    --c-bg: #0f1115;
+    --c-surface: #1a1d24;
+    --c-surface2: #22262f;
+    --c-text: #f2f4f8;
+    --c-muted: #9aa4b2;
+    --line: rgba(255, 255, 255, 0.10);
+    --shadow-soft: 0 16px 44px -16px rgba(0,0,0,.6);
+
+    /* industry accents (dark tints) */
+    --ind-technology-tint: #191f33;
+    --ind-finance-tint: #15241f;
+    --ind-marketing-tint: #2b1a21;
+    --ind-legal-tint: #221b30;
+    --ind-creative-tint: #2a2118;
+    --ind-operations-tint: #152528;
+    --ind-healthcare-tint: #2b1b18;
+    --ind-people-tint: #1a2129;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    transition: background-color .3s ease, color .3s ease;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5
+           text-[15px] font-medium transition-all duration-150 cursor-pointer;
+  }
+  /* primary = royal blue */
+  .btn-primary {
+    @apply bg-moss text-white hover:bg-moss-2 hover:-translate-y-px hover:shadow-soft;
+  }
+  /* gold = premium / commit actions (engage, propose) */
+  .btn-gold {
+    background: linear-gradient(135deg, var(--c-gold-bright), var(--c-gold));
+    @apply text-[#1a1400] font-semibold hover:-translate-y-px hover:shadow-soft;
+  }
+  .btn-ghost {
+    @apply border text-ink hover:bg-paper-2;
+    border-color: var(--line);
+  }
+  .btn-lg { @apply px-6 py-3.5 text-base; }
+  .card {
+    @apply bg-surface border rounded-xl2 p-7 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-soft;
+    border-color: var(--line);
+  }
+  .field {
+    @apply w-full rounded-xl border bg-surface px-4 py-3 text-[15px] text-ink
+           placeholder:text-muted/60 outline-none transition;
+    border-color: var(--line);
+  }
+  .field:focus {
+    border-color: var(--c-blue);
+    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
+  }
+  .label { @apply block text-sm font-medium text-ink mb-1.5; }
+  /* verified = gold (premium trust signal) */
+  .badge-verified {
+    @apply inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-wide
+           px-2.5 py-1 rounded-md;
+    color: var(--c-gold);
+    border: 1px solid var(--c-gold);
+  }
+}
+
+/* Industry theming helper: set --c-industry / --c-industry-tint on a wrapper
+   (e.g. <div data-industry="finance">) and children can use bg-industry etc. */
+[data-industry="technology"] { --c-industry: var(--ind-technology); --c-industry-tint: var(--ind-technology-tint); }
+[data-industry="finance"]    { --c-industry: var(--ind-finance);    --c-industry-tint: var(--ind-finance-tint); }
+[data-industry="marketing"]  { --c-industry: var(--ind-marketing);  --c-industry-tint: var(--ind-marketing-tint); }
+[data-industry="legal"]      { --c-industry: var(--ind-legal);      --c-industry-tint: var(--ind-legal-tint); }
+[data-industry="creative"]   { --c-industry: var(--ind-creative);   --c-industry-tint: var(--ind-creative-tint); }
+[data-industry="operations"] { --c-industry: var(--ind-operations); --c-industry-tint: var(--ind-operations-tint); }
+[data-industry="healthcare"] { --c-industry: var(--ind-healthcare); --c-industry-tint: var(--ind-healthcare-tint); }
+[data-industry="people"]     { --c-industry: var(--ind-people);     --c-industry-tint: var(--ind-people-tint); }
