@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { signIn, signInWithOAuth } from '../actions';
 
-export default function SignInPage() {
+function SignInForm() {
   const params = useSearchParams();
   const redirect = params.get('redirect') || '/dashboard';
   const [error, setError] = useState<string | null>(null);
@@ -69,5 +69,13 @@ export default function SignInPage() {
         </p>
       </div>
     </div>
+  );
+}
+
+export default function SignInPage() {
+  return (
+    <Suspense fallback={null}>
+      <SignInForm />
+    </Suspense>
   );
 }

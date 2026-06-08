@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
+import { createClient, createServiceClient } from '@/lib/supabase/server';
 import { createFundingIntent } from '@/lib/stripe/escrow';
 
 /**
@@ -47,8 +47,13 @@ export async function POST(
     currency: eng.currency ?? 'gbp',
   });
 
-  // Stash the intent id so the webhook can match it back to the milestone.
-  await supabase.from('milestones').update({ payment_intent_id: intent.id }).eq('id', mid);
+  // Stash the intent id so the release route can recover the funding charge.
+  // Must use the service client: milestones has no RLS write policy for clients,
+  // so a user-scoped update here is silently denied (leaving payment_intent_id
+  // null and breaking release). The caller was already authorised as the funding
+  // business above.
+  const svc = createServiceClient();
+  await svc.from('milestones').update({ payment_intent_id: intent.id }).eq('id', mid);
 
   return NextResponse.json({ clientSecret: intent.clientSecret, paymentIntentId: intent.id });
 }

@@ -119,7 +119,7 @@ export default async function PartnerDashboardPage() {
         </div>
       )}
 
-      <CapacityManager listings={capacityListings} />
+      <CapacityManager listings={capacityListings ?? []} />
 
       {/* commission explainer */}
       <div className="mt-7 bg-[#1e3a8a] text-[#f6f3ec] rounded-xl p-6 relative overflow-hidden">

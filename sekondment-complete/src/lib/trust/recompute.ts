@@ -75,7 +75,7 @@ export async function recomputeTrustScore(accountId: string): Promise<number> {
     .eq(col, profileId);
 
   const total = engagements?.length ?? 0;
-  const completed = engagements?.filter((e) => e.status === 'complete').length ?? 0;
+  const completed = engagements?.filter((e) => (e as any).status === 'complete').length ?? 0;
 
   // Count distinct counterparties who engaged more than once (repeat engagement metric).
   const counterpartyField = isExpert ? 'business_id' : 'expert_id';

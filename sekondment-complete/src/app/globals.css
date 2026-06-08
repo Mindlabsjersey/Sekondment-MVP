@@ -84,8 +84,12 @@
   }
   .field {
     @apply w-full rounded-xl border bg-surface px-4 py-3 text-[15px] text-ink
-           placeholder:text-muted/60 outline-none transition;
+           outline-none transition;
     border-color: var(--line);
+  }
+  .field::placeholder {
+    color: var(--c-muted);
+    opacity: 0.6;
   }
   .field:focus {
     border-color: var(--c-blue);

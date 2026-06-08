@@ -36,14 +36,17 @@ export async function POST(req: Request) {
           .eq('id', milestone_id)
           .eq('status', 'pending');
 
-        await svc.from('ledger_entries').insert({
+        // Idempotent: Stripe can redeliver this event. The unique index on
+        // (stripe_object_id, entry_type) backs ON CONFLICT DO NOTHING so a retry
+        // never writes a duplicate 'fund' money row.
+        await svc.from('ledger_entries').upsert({
           engagement_id,
           milestone_id,
           entry_type: 'fund',
           amount: pi.amount / 100,
           currency: pi.currency.toUpperCase(),
           stripe_object_id: pi.id,
-        });
+        }, { onConflict: 'stripe_object_id,entry_type', ignoreDuplicates: true });
 
         await svc.from('activity_events').insert({
           engagement_id,

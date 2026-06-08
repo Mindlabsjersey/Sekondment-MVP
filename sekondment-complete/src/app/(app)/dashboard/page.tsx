@@ -31,10 +31,10 @@ export default async function DashboardPage() {
   if (!profile) redirect('/onboarding');
 
   const displayName = isBusiness
-    ? (profile as { company_name: string }).company_name
-    : (profile as { name: string }).name;
+    ? (profile as unknown as { company_name: string }).company_name
+    : (profile as unknown as { name: string }).name;
 
-  const profileId = (profile as { id: string }).id;
+  const profileId = (profile as unknown as { id: string }).id;
 
   // Live counts for the dashboard tiles.
   let tiles;
@@ -100,11 +100,11 @@ export default async function DashboardPage() {
       <div className="bg-white border border-[var(--line)] rounded-xl2 p-8 shadow-soft">
         <div className="flex items-center justify-between mb-2">
           <h2 className="font-serif text-xl">Trust Score</h2>
-          <span className="font-serif text-2xl">{(profile as { trust_score: number }).trust_score}/100</span>
+          <span className="font-serif text-2xl">{(profile as unknown as { trust_score: number }).trust_score}/100</span>
         </div>
         <div className="h-2 rounded-full bg-paper-2 overflow-hidden">
           <div className="h-full bg-gradient-to-r from-moss to-sand rounded-full"
-            style={{ width: `${(profile as { trust_score: number }).trust_score}%` }} />
+            style={{ width: `${(profile as unknown as { trust_score: number }).trust_score}%` }} />
         </div>
         <p className="text-muted text-sm mt-3">
           Complete verification and finish engagements to raise your score.
