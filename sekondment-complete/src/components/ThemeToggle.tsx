@@ -38,7 +38,8 @@ export const themeInitScript = `
 (function(){
   try {
     var m = document.cookie.match(/(?:^|; )theme=(dark|light)/);
-    var t = m ? m[1] : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    // Default to light (white). Dark mode is opt-in via the toggle (persisted cookie).
+    var t = m ? m[1] : 'light';
     if (t === 'dark') document.documentElement.classList.add('dark');
   } catch(e){}
 })();

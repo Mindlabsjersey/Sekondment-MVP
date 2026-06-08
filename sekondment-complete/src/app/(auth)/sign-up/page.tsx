@@ -40,7 +40,7 @@ export default function SignUpPage() {
               type="button"
               onClick={() => setRole(r)}
               className={`py-2.5 rounded-lg text-xs font-medium transition ${
-                role === r ? 'bg-white shadow-sm text-ink' : 'text-muted hover:text-ink'
+                role === r ? 'bg-white shadow-sm text-[#0f1419]' : 'text-muted hover:text-ink'
               }`}
             >
               {r === 'business' ? 'Business' : r === 'expert' ? 'Expert' : 'Employer'}
