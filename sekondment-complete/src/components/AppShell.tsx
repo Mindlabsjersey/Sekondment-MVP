@@ -7,37 +7,37 @@ import { createClient } from '@/lib/supabase/server';
 import { getPlatformRole } from '@/lib/platform/access';
 import type { AccountType } from '@/lib/types/database';
 
-const NAV: Record<'business' | 'expert' | 'admin', { href: string; label: string }[]> = {
+const NAV: Record<'business' | 'expert' | 'admin', { href: string; label: string; icon: string }[]> = {
   business: [
-    { href: '/dashboard', label: 'Dashboard' },
-    { href: '/experts', label: 'Find Experts' },
-    { href: '/opportunities', label: 'Opportunities' },
-    { href: '/engagements', label: 'Engagements' },
-    { href: '/messages', label: 'Messages' },
-    { href: '/employees', label: 'Team' },
-    { href: '/teams', label: 'Find a Team' },
-    { href: '/saved', label: 'Saved' },
-    { href: '/capacity', label: 'Capacity' },
-    { href: '/settings', label: 'Settings' },
+    { href: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
+    { href: '/experts', label: 'Find Experts', icon: 'search' },
+    { href: '/opportunities', label: 'Opportunities', icon: 'briefcase' },
+    { href: '/engagements', label: 'Engagements', icon: 'chart' },
+    { href: '/messages', label: 'Messages', icon: 'message' },
+    { href: '/employees', label: 'Team', icon: 'users' },
+    { href: '/teams', label: 'Find a Team', icon: 'users' },
+    { href: '/saved', label: 'Saved', icon: 'bookmark' },
+    { href: '/capacity', label: 'Capacity', icon: 'chart' },
+    { href: '/settings', label: 'Settings', icon: 'settings' },
   ],
   expert: [
-    { href: '/dashboard', label: 'Dashboard' },
-    { href: '/opportunities', label: 'Find Work' },
-    { href: '/saved', label: 'Saved' },
-    { href: '/engagements', label: 'Engagements' },
-    { href: '/messages', label: 'Messages' },
-    { href: '/settings', label: 'Settings' },
+    { href: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
+    { href: '/opportunities', label: 'Find Work', icon: 'briefcase' },
+    { href: '/saved', label: 'Saved', icon: 'bookmark' },
+    { href: '/engagements', label: 'Engagements', icon: 'chart' },
+    { href: '/messages', label: 'Messages', icon: 'message' },
+    { href: '/settings', label: 'Settings', icon: 'settings' },
   ],
   admin: [
-    { href: '/admin/disputes', label: 'Disputes' },
-    { href: '/admin/verification', label: 'Verification' },
-    { href: '/admin/flagged', label: 'Flagged' },
-    { href: '/admin/ledger', label: 'Ledger' },
-    { href: '/admin/users', label: 'Users' },
-    { href: '/admin/compliance', label: 'Compliance' },
-    { href: '/admin/activity', label: 'Activity' },
-    { href: '/admin/expertise', label: 'Expertise' },
-    { href: '/admin/analytics', label: 'Analytics' },
+    { href: '/admin/disputes', label: 'Disputes', icon: 'shield' },
+    { href: '/admin/verification', label: 'Verification', icon: 'shield' },
+    { href: '/admin/flagged', label: 'Flagged', icon: 'shield' },
+    { href: '/admin/ledger', label: 'Ledger', icon: 'chart' },
+    { href: '/admin/users', label: 'Users', icon: 'users' },
+    { href: '/admin/compliance', label: 'Compliance', icon: 'shield' },
+    { href: '/admin/activity', label: 'Activity', icon: 'chart' },
+    { href: '/admin/expertise', label: 'Expertise', icon: 'search' },
+    { href: '/admin/analytics', label: 'Analytics', icon: 'chart' },
   ],
 };
 
@@ -82,44 +82,53 @@ export default async function AppShell({
 
   return (
     <div className="min-h-screen relative z-10">
-      <nav className="sticky top-0 z-50 backdrop-blur-md bg-paper/80 border-b border-[var(--line)]">
-        <div className="max-w-6xl mx-auto px-6 h-[64px] flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Link href="/dashboard" className="flex items-center gap-2.5 font-serif font-semibold text-lg">
-              <span className="w-6 h-6 rounded-md bg-moss relative after:content-[''] after:absolute after:top-1.5 after:right-1.5 after:w-2 after:h-2 after:rounded-sm after:bg-sand" />
-              Sekondment
-            </Link>
-            <AppNav links={links} />
-          </div>
-          <div className="flex items-center gap-2.5">
+      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-paper/90 border-b border-[var(--line)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[68px] flex items-center gap-4">
+          {/* Logo - Left */}
+          <Link href="/dashboard" className="flex items-center gap-2.5 font-serif font-semibold text-lg flex-shrink-0 hover:opacity-80 transition">
+            <span className="w-8 h-8 rounded-xl bg-gradient-to-br from-moss to-moss/70 relative shadow-sm">
+              <span className="absolute top-2 right-2 w-2.5 h-2.5 rounded-md bg-sand" />
+            </span>
+            <span className="hidden sm:block">Sekondment</span>
+          </Link>
+
+          {/* Centered Navigation */}
+          <AppNav links={links} />
+
+          {/* Right Actions */}
+          <div className="flex items-center gap-2 flex-shrink-0">
             {platformRole && (
               <Link href="/platform"
-                className="hidden sm:inline-block px-3 py-1.5 rounded-lg text-sm font-medium bg-ink text-paper hover:opacity-90 transition">
-                Ops Centre
+                className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-gradient-to-r from-ink to-ink/90 text-paper hover:shadow-lg hover:shadow-ink/20 transition-all">
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" />
+                  <rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" />
+                </svg>
+                Ops
               </Link>
             )}
             {user && <NotificationBell userId={user.id} initial={notifs} />}
             <ThemeToggle />
             {profile && (
               <Link href="/settings" title={profile.name}
-                className="flex items-center gap-2 pl-1 pr-2.5 py-1 rounded-full border hover:bg-paper-2 transition"
-                style={{ borderColor: 'var(--line)' }}>
+                className="flex items-center gap-2 pl-1 pr-3 py-1.5 rounded-full bg-paper-2/50 border border-[var(--line)]/50 hover:bg-paper-2 hover:border-[var(--line)] hover:shadow-sm transition-all">
                 {profile.imageUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={profile.imageUrl} alt="" className="w-6 h-6 rounded-full object-cover" />
+                  <img src={profile.imageUrl} alt="" className="w-7 h-7 rounded-full object-cover" />
                 ) : (
-                  <span className="w-6 h-6 rounded-full bg-moss/15 text-moss text-xs font-semibold flex items-center justify-center">{initials}</span>
+                  <span className="w-7 h-7 rounded-full bg-gradient-to-br from-moss/20 to-moss/5 text-moss text-xs font-bold flex items-center justify-center">{initials}</span>
                 )}
-                <span className="hidden lg:block text-sm font-medium text-ink/80 max-w-[120px] truncate">{profile.name}</span>
+                <span className="hidden xl:block text-sm font-medium text-ink/80 max-w-[100px] truncate">{profile.name}</span>
               </Link>
             )}
-            <form action={signOut}>
-              <button className="text-sm font-medium text-muted hover:text-ink transition">Sign out</button>
+            <form action={signOut} className="hidden sm:block">
+              <button className="text-sm font-medium text-muted hover:text-ink px-2 py-1 rounded-lg hover:bg-paper-2 transition-all">
+                Sign out
+              </button>
             </form>
           </div>
         </div>
       </nav>
-      <main className="max-w-6xl mx-auto px-6 py-10">{children}</main>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">{children}</main>
     </div>
   );
 }
