@@ -2,15 +2,16 @@
 
 import { createServiceClient } from '@/lib/supabase/server';
 
-/* Capability search — find TEAMS (employer partners + their deployed people) by the
+/* Capability search — find TEAMS (businesses + their deployed employees) by the
    expertise they collectively hold. Complements expert search: a business can find a
-   consultancy/employer that can field a whole capability, not just one freelancer.
+   partner company that can field a whole capability, not just one freelancer.
    Read-only, no Stripe. */
 
 export type TeamResult = {
-  partnerId: string;
+  businessId: string;
   company: string;
   industry: string | null;
+  logoUrl: string | null;
   memberCount: number;
   expertise: { name: string; level: string }[];
   matchedCount: number;       // how many of the searched terms this team covers
@@ -20,21 +21,22 @@ export async function searchTeams(query: string): Promise<TeamResult[]> {
   const svc = createServiceClient();
   const q = query.trim().toLowerCase();
 
-  // All employer partners.
-  const { data: partners } = await svc
-    .from('employer_partners')
-    .select('id, company_name, industry');
-  if (!partners?.length) return [];
+  // Businesses that have deployed employees (company resources).
+  const { data: businesses } = await svc
+    .from('business_profiles')
+    .select('id, company_name, industry, logo_url');
+  if (!businesses?.length) return [];
 
-  // Experts grouped by their employer_partner_id, with their structured expertise.
-  const { data: experts } = await svc
+  // Employee experts deployed to businesses, with their structured expertise.
+  const { data: employees } = await svc
     .from('expert_profiles')
-    .select('id, employer_partner_id, profile_expertise(expertise_id, verification_level, expertise_taxonomy(name))');
+    .select('id, employing_business_id, employment_status, profile_expertise(expertise_id, verification_level, expertise_taxonomy(name))')
+    .eq('employment_status', 'approved'); // Only approved employees count as team members
 
   const results: TeamResult[] = [];
-  for (const p of partners) {
-    const members = (experts ?? []).filter((e: any) => e.employer_partner_id === p.id);
-    if (!members.length) continue;
+  for (const b of businesses) {
+    const members = (employees ?? []).filter((e: any) => e.employing_business_id === b.id);
+    if (!members.length) continue; // Only show businesses with active employees
 
     // Union of expertise across the team (dedup by name, keep best level).
     const map = new Map<string, string>();
@@ -57,8 +59,13 @@ export async function searchTeams(query: string): Promise<TeamResult[]> {
     if (q && matched === 0) continue;
 
     results.push({
-      partnerId: p.id, company: p.company_name as string, industry: (p.industry as string) ?? null,
-      memberCount: members.length, expertise, matchedCount: matched,
+      businessId: b.id,
+      company: b.company_name as string,
+      industry: (b.industry as string) ?? null,
+      logoUrl: (b.logo_url as string) ?? null,
+      memberCount: members.length,
+      expertise,
+      matchedCount: matched,
     });
   }
 

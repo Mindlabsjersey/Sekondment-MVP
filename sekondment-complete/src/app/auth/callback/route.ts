@@ -22,7 +22,9 @@ export async function GET(request: Request) {
       // handle_new_user trigger may have defaulted a new user to 'expert'.
       // If this OAuth flow specified a different intended type AND the account
       // is brand new (no profile yet), correct it here.
-      if (accountType && ['business', 'expert', 'employer_partner'].includes(accountType)) {
+      // Normalize legacy employer_partner -> business
+      const effectiveType = accountType === 'employer_partner' ? 'business' : accountType;
+      if (effectiveType && ['business', 'expert'].includes(effectiveType)) {
         const { data: { user } } = await supabase.auth.getUser();
         if (user) {
           const svc = createServiceClient();
@@ -30,7 +32,7 @@ export async function GET(request: Request) {
             .from('accounts').select('account_type').eq('id', user.id).single();
           // Only correct if no profile exists yet (i.e. they haven't onboarded),
           // so we never reassign an established account.
-          const tables = { business: 'business_profiles', expert: 'expert_profiles', employer_partner: 'employer_partners' } as const;
+          const tables = { business: 'business_profiles', expert: 'expert_profiles' } as const;
           let hasProfile = false;
           if (acc) {
             const t = tables[acc.account_type as keyof typeof tables];
@@ -39,8 +41,8 @@ export async function GET(request: Request) {
               hasProfile = !!p;
             }
           }
-          if (acc && acc.account_type !== accountType && !hasProfile) {
-            await svc.from('accounts').update({ account_type: accountType }).eq('id', user.id);
+          if (acc && acc.account_type !== effectiveType && !hasProfile) {
+            await svc.from('accounts').update({ account_type: effectiveType }).eq('id', user.id);
           }
         }
       }

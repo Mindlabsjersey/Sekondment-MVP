@@ -17,7 +17,8 @@ export default async function SettingsPage() {
     .from('accounts').select('account_type, email').eq('id', user.id).single();
   if (!account) redirect('/sign-in');
 
-  const type = account.account_type;
+  // Normalize legacy employer_partner -> business
+  const type = account.account_type === 'employer_partner' ? 'business' : account.account_type;
   let profile: any = null;
   if (type === 'expert') {
     const { data } = await supabase.from('expert_profiles').select('*').eq('account_id', user.id).single();
@@ -25,12 +26,9 @@ export default async function SettingsPage() {
   } else if (type === 'business') {
     const { data } = await supabase.from('business_profiles').select('*').eq('account_id', user.id).single();
     profile = data;
-  } else if (type === 'employer_partner') {
-    const { data } = await supabase.from('employer_partners').select('*').eq('account_id', user.id).single();
-    profile = data;
   }
 
-  const showPayments = type === 'expert' || type === 'business' || type === 'employer_partner';
+  const showPayments = type === 'expert' || type === 'business';
 
   // Load this user's verification documents for the evidence panel.
   const { data: verifDocs } = await supabase

@@ -31,16 +31,25 @@ export function TeamSearchClient({ initial }: { initial: TeamResult[] }) {
 
       {results.length === 0 ? (
         <div className="bg-surface border border-[var(--line)] rounded-xl p-6 text-center">
-          <p className="text-muted text-sm">No teams found{q ? ` for “${q}”` : ' yet'}. Employer partners with deployed people appear here.</p>
+          <p className="text-muted text-sm">No teams found{q ? ` for “${q}”` : ' yet'}. Businesses with approved employees appear here.</p>
         </div>
       ) : (
         <div className="space-y-3">
           {results.map((t) => (
-            <div key={t.partnerId} className="bg-surface border border-[var(--line)] rounded-xl p-4">
+            <div key={t.businessId} className="bg-surface border border-[var(--line)] rounded-xl p-4">
               <div className="flex justify-between items-start gap-3 mb-2">
-                <div className="min-w-0">
-                  <p className="font-medium">{t.company}</p>
-                  <p className="text-xs text-muted">{[t.industry, `${t.memberCount} ${t.memberCount === 1 ? 'person' : 'people'}`].filter(Boolean).join(' · ')}</p>
+                <div className="min-w-0 flex items-center gap-2">
+                  {t.logoUrl ? (
+                    <img src={t.logoUrl} alt="" className="w-8 h-8 rounded-lg object-cover flex-none" />
+                  ) : (
+                    <span className="w-8 h-8 rounded-lg bg-moss/15 text-moss text-xs font-semibold flex items-center justify-center flex-none">
+                      {t.company.slice(0, 1).toUpperCase()}
+                    </span>
+                  )}
+                  <div>
+                    <p className="font-medium">{t.company}</p>
+                    <p className="text-xs text-muted">{[t.industry, `${t.memberCount} ${t.memberCount === 1 ? 'person' : 'people'}`].filter(Boolean).join(' · ')}</p>
+                  </div>
                 </div>
                 {t.matchedCount > 0 && (
                   <span className="text-xs font-semibold px-2 py-0.5 rounded flex-none" style={{ background: 'rgba(29,78,216,.1)', color: '#1d4ed8' }}>

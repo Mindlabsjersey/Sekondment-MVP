@@ -7,7 +7,7 @@ import { createClient } from '@/lib/supabase/server';
 import { getPlatformRole } from '@/lib/platform/access';
 import type { AccountType } from '@/lib/types/database';
 
-const NAV: Record<'business' | 'expert' | 'employer_partner' | 'admin', { href: string; label: string }[]> = {
+const NAV: Record<'business' | 'expert' | 'admin', { href: string; label: string }[]> = {
   business: [
     { href: '/dashboard', label: 'Dashboard' },
     { href: '/experts', label: 'Find Experts' },
@@ -26,10 +26,6 @@ const NAV: Record<'business' | 'expert' | 'employer_partner' | 'admin', { href: 
     { href: '/saved', label: 'Saved' },
     { href: '/engagements', label: 'Engagements' },
     { href: '/messages', label: 'Messages' },
-    { href: '/settings', label: 'Settings' },
-  ],
-  employer_partner: [
-    { href: '/partner', label: 'Dashboard' },
     { href: '/settings', label: 'Settings' },
   ],
   admin: [
@@ -52,42 +48,37 @@ export default async function AppShell({
   accountType: AccountType;
   children: React.ReactNode;
 }) {
-  const links = NAV[accountType] ?? NAV.expert;
+  // Normalize legacy employer_partner -> business (retirement path)
+  const effectiveType: 'business' | 'expert' | 'admin' =
+    accountType === 'employer_partner' ? 'business' : (accountType as any) ?? 'expert';
+  const links = NAV[effectiveType] ?? NAV.expert;
 
-  // Load the bell's notifications for the signed-in user.
+  // Batch all data loads to minimize round-trips.
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   let notifs: any[] = [];
   let profile: { name: string; imageUrl: string | null } | null = null;
-  if (user) {
-    const { data } = await supabase
-      .from('notifications')
-      .select('id, type, title, body, link, read_at, created_at')
-      .eq('account_id', user.id)
-      .order('created_at', { ascending: false })
-      .limit(20);
-    notifs = data ?? [];
+  let platformRole: Awaited<ReturnType<typeof getPlatformRole>> = null;
 
-    // Profile chip (logo/photo + name) shown in the nav.
-    if (accountType === 'business') {
-      const { data: p } = await supabase.from('business_profiles')
-        .select('company_name, logo_url').eq('account_id', user.id).maybeSingle();
-      if (p) profile = { name: p.company_name, imageUrl: p.logo_url };
-    } else if (accountType === 'employer_partner') {
-      const { data: p } = await supabase.from('employer_partners')
-        .select('company_name, logo_url').eq('account_id', user.id).maybeSingle();
-      if (p) profile = { name: p.company_name, imageUrl: p.logo_url };
-    } else {
-      const { data: p } = await supabase.from('expert_profiles')
-        .select('name, photo_url').eq('account_id', user.id).maybeSingle();
-      if (p) profile = { name: p.name, imageUrl: p.photo_url };
+  if (user) {
+    const accountId = user.id;
+    const [nRes, pRes, roleRes] = await Promise.all([
+      supabase.from('notifications')
+        .select('id, type, title, body, link, read_at, created_at')
+        .eq('account_id', accountId).order('created_at', { ascending: false }).limit(20),
+      effectiveType === 'business'
+        ? supabase.from('business_profiles').select('company_name, logo_url').eq('account_id', accountId).maybeSingle()
+        : supabase.from('expert_profiles').select('name, photo_url').eq('account_id', accountId).maybeSingle(),
+      getPlatformRole(),
+    ]);
+    notifs = nRes.data ?? [];
+    platformRole = roleRes;
+    if (pRes.data) {
+      const p = pRes.data as any;
+      profile = { name: p.company_name ?? p.name, imageUrl: p.logo_url ?? p.photo_url ?? null };
     }
   }
   const initials = (profile?.name || 'S').trim().slice(0, 1).toUpperCase();
-
-  // Internal staff get a link into the Operations Centre (separate from the
-  // marketplace account-type nav). Safe: returns null for non-staff.
-  const platformRole = user ? await getPlatformRole() : null;
 
   return (
     <div className="min-h-screen relative z-10">

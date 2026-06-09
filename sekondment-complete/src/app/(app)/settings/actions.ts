@@ -60,31 +60,6 @@ export async function updateBusinessProfile(formData: FormData) {
   return { success: true };
 }
 
-// ─── UPDATE PARTNER PROFILE ─────────────────────────────────────────────────
-export async function updatePartnerProfile(formData: FormData) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return { error: 'Not signed in.' };
-
-  const commission = formData.get('default_commission_pct') ? Number(formData.get('default_commission_pct')) : 0;
-  const patch = {
-    company_name: String(formData.get('company_name') || '').trim(),
-    industry: String(formData.get('industry') || '') || null,
-    website: String(formData.get('website') || '') || null,
-    description: String(formData.get('description') || '') || null,
-    location: String(formData.get('location') || '') || null,
-    company_size: String(formData.get('company_size') || '') || null,
-    default_commission_pct: Math.max(0, Math.min(1, commission)),
-  };
-  if (!patch.company_name) return { error: 'Company name is required.' };
-
-  const { error } = await supabase.from('employer_partners').update(patch).eq('account_id', user.id);
-  if (error) return { error: error.message };
-
-  revalidatePath('/settings');
-  return { success: true };
-}
-
 // ─── SAVE LOGO / PROFILE PHOTO URL ──────────────────────────────────────────
 // Persists a public URL (uploaded client-side to the 'logos' bucket) onto the
 // right column for the caller's account type.
@@ -97,13 +72,13 @@ export async function saveProfileImage(url: string) {
   const { data: account } = await supabase
     .from('accounts').select('account_type').eq('id', user.id).single();
 
+  // Normalize legacy employer_partner -> business
+  const effectiveType = account?.account_type === 'employer_partner' ? 'business' : account?.account_type;
   let res;
-  if (account?.account_type === 'expert') {
+  if (effectiveType === 'expert') {
     res = await supabase.from('expert_profiles').update({ photo_url: url }).eq('account_id', user.id);
-  } else if (account?.account_type === 'business') {
+  } else if (effectiveType === 'business') {
     res = await supabase.from('business_profiles').update({ logo_url: url }).eq('account_id', user.id);
-  } else if (account?.account_type === 'employer_partner') {
-    res = await supabase.from('employer_partners').update({ logo_url: url }).eq('account_id', user.id);
   } else {
     return { error: 'Unsupported account type.' };
   }

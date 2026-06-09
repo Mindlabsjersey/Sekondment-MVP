@@ -1,21 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { updateExpertProfile, updateBusinessProfile, updatePartnerProfile } from './actions';
+import { updateExpertProfile, updateBusinessProfile } from './actions';
 
 export default function ProfileEditor({ type, profile, email }: { type: string; profile: any; email: string }) {
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const [visibility, setVisibility] = useState<'listed' | 'unlisted'>(profile.visibility ?? 'listed');
-  const [commission, setCommission] = useState<number>(Number(profile.default_commission_pct ?? 0.2));
-
   async function action(formData: FormData) {
     setPending(true); setError(null); setSaved(false);
     if (type === 'expert') formData.set('visibility', visibility);
-    if (type === 'employer_partner') formData.set('default_commission_pct', String(commission));
-    const fn = type === 'expert' ? updateExpertProfile
-      : type === 'business' ? updateBusinessProfile : updatePartnerProfile;
+    const fn = type === 'expert' ? updateExpertProfile : updateBusinessProfile;
     const res = await fn(formData);
     if (res?.error) { setError(res.error); setPending(false); return; }
     setSaved(true); setPending(false);
@@ -75,23 +71,6 @@ export default function ProfileEditor({ type, profile, email }: { type: string; 
           </Two>
         </>}
 
-        {type === 'employer_partner' && <>
-          <Field label="Company name"><input name="company_name" required defaultValue={profile.company_name} className="field" /></Field>
-          <Field label="Description"><textarea name="description" rows={3} defaultValue={profile.description ?? ''} className="field resize-none" /></Field>
-          <Two>
-            <Field label="Industry"><input name="industry" defaultValue={profile.industry ?? ''} className="field" /></Field>
-            <Field label="Company size"><input name="company_size" defaultValue={profile.company_size ?? ''} className="field" /></Field>
-          </Two>
-          <Two>
-            <Field label="Location"><input name="location" defaultValue={profile.location ?? ''} className="field" /></Field>
-            <Field label="Website"><input name="website" defaultValue={profile.website ?? ''} className="field" /></Field>
-          </Two>
-          <div>
-            <label className="label">Default commission · {Math.round(commission * 100)}%</label>
-            <input type="range" min="0" max="0.4" step="0.05" value={commission}
-              onChange={(e) => setCommission(+e.target.value)} className="w-full accent-moss" />
-          </div>
-        </>}
       </div>
 
       {error && <p className="text-sm text-red-700 bg-red-50 px-3 py-2 rounded-lg">{error}</p>}
