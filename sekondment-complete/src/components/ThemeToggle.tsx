@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Theme toggle. Reads/writes the `dark` class on <html>. Defaults to the OS
- * preference on first load. We avoid localStorage (not available in some
- * embedded contexts) and instead persist via a cookie the layout can read.
+ * Theme toggle. Reads/writes the `dark` class on <html> and persists the choice
+ * in a `theme` cookie. The initial theme (default light) is resolved server-side
+ * in the root layout from that cookie, so there is no inline script and no flash.
  */
 export function ThemeToggle() {
   const [dark, setDark] = useState(false);
@@ -32,15 +32,3 @@ export function ThemeToggle() {
     </button>
   );
 }
-
-/** Inline script string to set the theme class before paint (no flash). */
-export const themeInitScript = `
-(function(){
-  try {
-    var m = document.cookie.match(/(?:^|; )theme=(dark|light)/);
-    // Default to light (white). Dark mode is opt-in via the toggle (persisted cookie).
-    var t = m ? m[1] : 'light';
-    if (t === 'dark') document.documentElement.classList.add('dark');
-  } catch(e){}
-})();
-`;
