@@ -1,11 +1,11 @@
 'use server';
 
-import { extractExpertiseFromText } from './cv-extract-actions';
+import { extractExpertiseFromText } from './cv-ai-actions';
 
-/* CV file → text → structured extraction.
+/* CV file → text → AI-powered structured extraction.
    Accepts plain text / .txt / .md directly. For PDF/DOCX we attempt extraction if
    a parser is available at runtime; otherwise we ask the user to paste the text.
-   Keeps the same extraction pipeline so achievements/expertise/seniority all flow through. */
+   Uses AI extraction to get headline, bio, skills, achievements, and suggested rate. */
 export async function extractFromCvFile(formData: FormData) {
   const file = formData.get('cv') as File | null;
   if (!file) return { ok: false as const, error: 'No file received.' };
@@ -58,6 +58,6 @@ export async function extractFromCvFile(formData: FormData) {
     return { ok: false as const, error: 'Not enough readable text found. Try pasting the CV text instead.' };
   }
 
-  const extracted = await extractExpertiseFromText(text);
-  return { ok: true as const, extracted, charCount: text.length };
+  // Delegate to AI extraction - returns { ok: true; extracted: Extraction; charCount } | { ok: false; error }
+  return await extractExpertiseFromText(text);
 }
