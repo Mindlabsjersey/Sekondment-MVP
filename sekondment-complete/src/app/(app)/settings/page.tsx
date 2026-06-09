@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import AppShell from '@/components/AppShell';
 import ProfileEditor from './ProfileEditor';
+import LogoUpload from './LogoUpload';
 import VerificationUpload from './VerificationUpload';
 import ExpertisePicker from './ExpertisePicker';
 import CVImport from './CVImport';
@@ -66,6 +67,11 @@ export default async function SettingsPage() {
 
       {profile ? (
         <>
+          {type === 'expert' ? (
+            <LogoUpload accountId={user.id} current={profile.photo_url ?? null} label="Profile photo" rounded="rounded-full" />
+          ) : (
+            <LogoUpload accountId={user.id} current={profile.logo_url ?? null} label="Company logo" />
+          )}
           <ProfileEditor type={type} profile={profile} email={account.email} />
           {type === 'expert' && <ExpertisePicker existing={expertiseTags} />}
           {type === 'expert' && <CVImport />}

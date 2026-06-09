@@ -84,3 +84,32 @@ export async function updatePartnerProfile(formData: FormData) {
   revalidatePath('/settings');
   return { success: true };
 }
+
+// ─── SAVE LOGO / PROFILE PHOTO URL ──────────────────────────────────────────
+// Persists a public URL (uploaded client-side to the 'logos' bucket) onto the
+// right column for the caller's account type.
+export async function saveProfileImage(url: string) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return { error: 'Not signed in.' };
+  if (!/^https?:\/\//.test(url)) return { error: 'Invalid image URL.' };
+
+  const { data: account } = await supabase
+    .from('accounts').select('account_type').eq('id', user.id).single();
+
+  let res;
+  if (account?.account_type === 'expert') {
+    res = await supabase.from('expert_profiles').update({ photo_url: url }).eq('account_id', user.id);
+  } else if (account?.account_type === 'business') {
+    res = await supabase.from('business_profiles').update({ logo_url: url }).eq('account_id', user.id);
+  } else if (account?.account_type === 'employer_partner') {
+    res = await supabase.from('employer_partners').update({ logo_url: url }).eq('account_id', user.id);
+  } else {
+    return { error: 'Unsupported account type.' };
+  }
+  if (res.error) return { error: res.error.message };
+
+  revalidatePath('/settings');
+  revalidatePath('/', 'layout');
+  return { success: true };
+}
