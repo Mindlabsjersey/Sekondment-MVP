@@ -73,7 +73,8 @@ export default async function ExpertProfilePage({
 
   const isB = account.account_type === 'business';
   const avail = (expert as any).expert_availability;
-  const isResource = !!(expert as any).employing_business_id || !!(expert as any).employer_partner_id;
+  const isEmployee = !!(expert as any).employing_business_id;
+  const isResource = isEmployee || !!(expert as any).employer_partner_id;
   const companyName = (expert as any).employer_partners?.company_name ?? (expert as any).business_profiles?.company_name;
 
   // Average review score.
@@ -96,12 +97,26 @@ export default async function ExpertProfilePage({
         <div>
           {/* header */}
           <div className="flex gap-5 items-start mb-6">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-moss to-moss-2 text-white flex items-center justify-center font-serif font-semibold text-2xl flex-none">
+            <div className={`w-20 h-20 rounded-2xl text-white flex items-center justify-center font-serif font-semibold text-2xl flex-none ${
+              isEmployee ? 'bg-gradient-to-br from-sand to-sand/70' : 'bg-gradient-to-br from-moss to-moss-2'
+            }`}>
               {expert.name.split(' ').map((n: string) => n[0]).join('').slice(0, 2)}
             </div>
             <div className="flex-1">
               <div className="flex items-center gap-3 flex-wrap">
                 <h1 className="font-serif text-3xl tracking-tight">{expert.name}</h1>
+                
+                {/* Employee vs Expert badge - KEY DIFFERENTIATOR */}
+                {isEmployee ? (
+                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-sand/20 text-sand border border-sand/30">
+                    EMPLOYEE
+                  </span>
+                ) : (
+                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-moss/10 text-moss border border-moss/20">
+                    INDEPENDENT EXPERT
+                  </span>
+                )}
+                
                 {expert.verification_status === 'verified' && (
                   <span className="badge-verified">✓ VERIFIED</span>
                 )}
@@ -114,20 +129,20 @@ export default async function ExpertProfilePage({
                   {expert.onsite_available && <span className="ml-1 text-xs px-2 py-0.5 rounded bg-paper-2">On-site</span>}
                 </p>
               )}
-              {isResource && companyName && (
-                <p className="text-sm font-semibold text-sand mt-1">
-                  Company Resource · deployed via {companyName}
+              {isEmployee && companyName && (
+                <p className="text-sm font-medium text-ink/60 mt-1">
+                  Employed by {companyName} · Available for projects through Sekondment
                 </p>
               )}
             </div>
           </div>
 
-          {/* company resource notice */}
-          {isResource && (
+          {/* Employee engagement model notice */}
+          {isEmployee && (
             <div className="bg-sand/10 border border-sand/30 rounded-xl px-5 py-4 mb-6 text-sm leading-relaxed">
-              <strong>Company Resource</strong> — {expert.name} is deployed via {companyName}, who
-              remains their employer. Payment for any engagement routes to {companyName}.
-              {expert.name.split(' ')[0]} stays on their payroll throughout.
+              <strong className="text-sand">Employee Engagement Model</strong> — {expert.name} remains employed by {companyName}. 
+              When you hire them, payment routes through Sekondment to {companyName}, who passes a revenue share to {expert.name.split(' ')[0]} as a project bonus. 
+              The employee stays on their employer's payroll throughout the engagement.
             </div>
           )}
 
