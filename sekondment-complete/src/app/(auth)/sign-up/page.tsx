@@ -5,15 +5,28 @@ import Link from 'next/link';
 import { signUp, signInWithOAuth } from '../actions';
 import type { AccountType } from '@/lib/types/database';
 
+// UI personas. 'employee' is an expert account whose onboarding asks about
+// employer deployment — the DB account_type below stays business/expert.
+type Persona = 'business' | 'expert' | 'employee';
+const PERSONAS: { id: Persona; label: string }[] = [
+  { id: 'business', label: 'Business' },
+  { id: 'expert', label: 'Expert / Freelancer' },
+  { id: 'employee', label: 'Employee' },
+];
+function accountTypeFor(role: Persona): AccountType {
+  return role === 'business' ? 'business' : 'expert';
+}
+
 export default function SignUpPage() {
-  const [role, setRole] = useState<AccountType>('business');
+  const [role, setRole] = useState<Persona>('business');
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
   async function action(formData: FormData) {
     setPending(true);
     setError(null);
-    formData.set('account_type', role);
+    formData.set('account_type', accountTypeFor(role));
+    formData.set('signup_intent', role);
     const res = await signUp(formData);
     if (res?.error) {
       setError(res.error);
@@ -32,35 +45,35 @@ export default function SignUpPage() {
         <h1 className="font-serif text-3xl mb-2 tracking-tight">Create your account</h1>
         <p className="text-muted mb-7">Deploy expertise, not headcount.</p>
 
-        {/* Role toggle — defines the entire experience */}
+        {/* Persona toggle — defines the entire experience */}
         <div className="grid grid-cols-3 gap-2 p-1 bg-paper-2 rounded-xl mb-6">
-          {(['business', 'expert', 'employer_partner'] as const).map((r) => (
+          {PERSONAS.map((p) => (
             <button
-              key={r}
+              key={p.id}
               type="button"
-              onClick={() => setRole(r)}
-              className={`py-2.5 rounded-lg text-xs font-medium transition ${
-                role === r ? 'bg-white shadow-sm text-[#0f1419]' : 'text-muted hover:text-ink'
+              onClick={() => setRole(p.id)}
+              className={`py-2.5 px-1 rounded-lg text-xs font-medium leading-tight transition ${
+                role === p.id ? 'bg-white shadow-sm text-[#0f1419]' : 'text-muted hover:text-ink'
               }`}
             >
-              {r === 'business' ? 'Business' : r === 'expert' ? 'Expert' : 'Employer'}
+              {p.label}
             </button>
           ))}
         </div>
 
         <p className="text-[13px] text-muted mb-6 -mt-2">
           {role === 'business'
-            ? 'Find and engage verified experts through secure, milestone-based work.'
+            ? 'Hire verified experts through secure, milestone-based work — and deploy your own team.'
             : role === 'expert'
             ? 'Deploy your expertise and find opportunities worth doing.'
-            : 'Deploy your employees through Sekondment and earn commission on their work.'}
+            : 'Work independently or be deployed by your employer. You can match yourself to your company, who approves you before you go live.'}
         </p>
 
         <div className="space-y-2.5 mb-5">
-          <button onClick={() => signInWithOAuth('google', role)} className="btn btn-ghost w-full">
+          <button onClick={() => signInWithOAuth('google', accountTypeFor(role), role)} className="btn btn-ghost w-full">
             Continue with Google
           </button>
-          <button onClick={() => signInWithOAuth('linkedin_oidc', role)} className="btn btn-ghost w-full">
+          <button onClick={() => signInWithOAuth('linkedin_oidc', accountTypeFor(role), role)} className="btn btn-ghost w-full">
             Continue with LinkedIn
           </button>
         </div>
@@ -72,10 +85,10 @@ export default function SignUpPage() {
         <form action={action} className="space-y-4">
           <div>
             <label className="label" htmlFor="full_name">
-              {role === 'expert' ? 'Full name' : 'Company name'}
+              {role === 'business' ? 'Company name' : 'Full name'}
             </label>
             <input id="full_name" name="full_name" required className="field"
-              placeholder={role === 'expert' ? 'Jane Doe' : 'Acme Studio'} />
+              placeholder={role === 'business' ? 'Acme Studio' : 'Jane Doe'} />
           </div>
           <div>
             <label className="label" htmlFor="email">Work email</label>

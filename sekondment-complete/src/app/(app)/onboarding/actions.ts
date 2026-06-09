@@ -122,6 +122,22 @@ export async function saveExpertProfile(formData: FormData) {
     { onConflict: 'expert_id' }
   );
 
+  // Employee deployment (Company Resource). The employee matches themselves to a
+  // Business; it stays 'pending' until that Business approves them. Columns
+  // employment_status / payment_preference come from migration 0033 — if it
+  // hasn't been applied yet this update no-ops and onboarding still completes.
+  const employmentStatus = String(formData.get('employment_status') || '');
+  if (employmentStatus === 'pending' || employmentStatus === 'independent') {
+    const empPatch: Record<string, any> = { employment_status: employmentStatus };
+    const employingBusinessId = String(formData.get('employing_business_id') || '');
+    const paymentPreference = String(formData.get('payment_preference') || '');
+    if (employmentStatus === 'pending' && employingBusinessId) {
+      empPatch.employing_business_id = employingBusinessId;
+      if (paymentPreference) empPatch.payment_preference = paymentPreference;
+    }
+    await supabase.from('expert_profiles').update(empPatch).eq('id', profile.id);
+  }
+
 
   // Record platform terms acceptance (idempotent) now the account exists.
   try {

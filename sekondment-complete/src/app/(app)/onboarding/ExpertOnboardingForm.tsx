@@ -20,12 +20,26 @@ const AVAILABILITY = [
   { v: 'project_only', l: 'Project only' },
 ];
 
-export default function ExpertOnboardingForm({ defaultName }: { defaultName?: string }) {
+type BusinessOption = { id: string; company_name: string };
+
+export default function ExpertOnboardingForm({
+  defaultName,
+  employeeIntent = false,
+  businesses = [],
+}: {
+  defaultName?: string;
+  employeeIntent?: boolean;
+  businesses?: BusinessOption[];
+}) {
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const [cats, setCats] = useState<ExpertCategory[]>(['consultant']);
   const [modes, setModes] = useState<string[]>(['remote']);
   const [visibility, setVisibility] = useState<'listed' | 'unlisted'>('listed');
+  // Employee-only: how the person works and (if deployed) which business + payee.
+  const [employment, setEmployment] = useState<'independent' | 'employed'>('independent');
+  const [employerId, setEmployerId] = useState('');
+  const [payment, setPayment] = useState<'me' | 'employer' | 'split'>('employer');
 
   function toggle<T>(list: T[], set: (v: T[]) => void, value: T) {
     set(list.includes(value) ? list.filter((x) => x !== value) : [...list, value]);
@@ -34,14 +48,93 @@ export default function ExpertOnboardingForm({ defaultName }: { defaultName?: st
   async function action(formData: FormData) {
     setPending(true);
     setError(null);
-    formData.set('categories', cats.join(','));
+    const isDeployed = employeeIntent && employment === 'employed';
+    if (isDeployed && !employerId) {
+      setError('Please choose the employer that deploys you, or switch to working independently.');
+      setPending(false);
+      return;
+    }
+    // A deployed employee is a Company Resource; ensure that category is set.
+    const finalCats = isDeployed
+      ? Array.from(new Set<ExpertCategory>([...cats, 'company_resource']))
+      : cats;
+    formData.set('categories', finalCats.join(','));
     formData.set('work_modes', modes.join(','));
+    formData.set('employment_status', isDeployed ? 'pending' : 'independent');
+    if (isDeployed) {
+      formData.set('employing_business_id', employerId);
+      formData.set('payment_preference', payment);
+    }
     const res = await saveExpertProfile(formData);
     if (res?.error) { setError(res.error); setPending(false); }
   }
 
   return (
     <form action={action} className="space-y-5">
+      {employeeIntent && (
+        <div className="rounded-xl border border-[var(--line)] bg-paper-2/60 p-4 space-y-4">
+          <div>
+            <label className="label">How do you work?</label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {([
+                { v: 'independent', l: 'Independently', d: 'You’re paid directly for your own work.' },
+                { v: 'employed', l: 'Deployed by my employer', d: 'Your company deploys you and is paid. They approve you first.' },
+              ] as const).map(({ v, l, d }) => (
+                <label key={v} className={`text-left p-3.5 rounded-xl border cursor-pointer transition block
+                  ${employment === v ? 'bg-moss/5 border-moss' : 'bg-surface border-[var(--line)] hover:border-moss/40'}`}>
+                  <input type="radio" name="employment_choice" value={v} checked={employment === v}
+                    onChange={() => setEmployment(v)} className="sr-only" />
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className={`w-4 h-4 rounded-full border-2 flex-none flex items-center justify-center
+                      ${employment === v ? 'border-moss' : 'border-[var(--line)]'}`}>
+                      {employment === v && <span className="w-2 h-2 rounded-full bg-moss" />}
+                    </span>
+                    <span className="font-medium text-sm">{l}</span>
+                  </div>
+                  <p className="text-xs text-muted leading-snug pl-6">{d}</p>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          {employment === 'employed' && (
+            <div className="space-y-4">
+              <div>
+                <label className="label" htmlFor="employer_select">Your employer *</label>
+                <select id="employer_select" className="field" value={employerId}
+                  onChange={(e) => setEmployerId(e.target.value)}>
+                  <option value="">Select your company…</option>
+                  {businesses.map((b) => <option key={b.id} value={b.id}>{b.company_name}</option>)}
+                </select>
+                <p className="text-xs text-muted mt-1">
+                  {businesses.length === 0
+                    ? 'No businesses are registered yet. Ask your employer to sign up as a Business, then link from Settings.'
+                    : 'They’ll receive an approval request. You go live once they confirm you.'}
+                </p>
+              </div>
+              <div>
+                <label className="label">Who receives payment?</label>
+                <div className="flex flex-wrap gap-2">
+                  {([
+                    { v: 'employer', l: 'My employer' },
+                    { v: 'split', l: 'Split' },
+                    { v: 'me', l: 'Me' },
+                  ] as const).map(({ v, l }) => (
+                    <button key={v} type="button" onClick={() => setPayment(v)}
+                      className={`px-3.5 py-2 rounded-lg text-sm font-medium border transition ${
+                        payment === v ? 'bg-moss text-white border-moss' : 'bg-white border-[var(--line)] text-muted hover:text-ink'
+                      }`}>
+                      {l}
+                    </button>
+                  ))}
+                </div>
+                <p className="text-xs text-muted mt-1">Default for your engagements. The exact split is confirmed per deal.</p>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
           <label className="label" htmlFor="name">Your name *</label>

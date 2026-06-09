@@ -18,14 +18,31 @@ export default async function OnboardingPage() {
   const type = account?.account_type;
   const isBusiness = type === 'business';
   const isPartner = type === 'employer_partner';
+  // 'employee' is an expert account whose sign-up persona was Employee. They get
+  // the extra "are you deployed by your employer?" question.
+  const signupIntent = (user.user_metadata as { signup_intent?: string } | null)?.signup_intent;
+  const isEmployee = type === 'expert' && signupIntent === 'employee';
+
+  // For the employer picker, load businesses the employee can match themselves to.
+  let businesses: { id: string; company_name: string }[] = [];
+  if (isEmployee) {
+    const { data } = await supabase
+      .from('business_profiles')
+      .select('id, company_name')
+      .order('company_name', { ascending: true });
+    businesses = data ?? [];
+  }
 
   const heading = isBusiness ? 'Tell us about your business'
     : isPartner ? 'Set up your company'
+    : isEmployee ? 'Set up your employee profile'
     : 'Build your expert profile';
   const sub = isBusiness
     ? 'This is what experts see when you engage them. You can refine it any time.'
     : isPartner
     ? 'Register your company so you can deploy employees through Sekondment and earn commission.'
+    : isEmployee
+    ? 'Tell us how you work. If your employer deploys you, match yourself to them — they approve you before you go live.'
     : 'This is your storefront. A complete profile earns a higher Trust Score and better opportunities.';
 
   return (
@@ -38,7 +55,13 @@ export default async function OnboardingPage() {
         <div className="bg-white border border-[var(--line)] rounded-xl2 p-7 sm:p-9 shadow-soft">
           {isBusiness && <BusinessOnboardingForm defaultName={account?.full_name ?? undefined} />}
           {isPartner && <PartnerOnboardingForm defaultName={account?.full_name ?? undefined} />}
-          {!isBusiness && !isPartner && <ExpertOnboardingForm defaultName={account?.full_name ?? undefined} />}
+          {!isBusiness && !isPartner && (
+            <ExpertOnboardingForm
+              defaultName={account?.full_name ?? undefined}
+              employeeIntent={isEmployee}
+              businesses={businesses}
+            />
+          )}
         </div>
       </div>
     </div>

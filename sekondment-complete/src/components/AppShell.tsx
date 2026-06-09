@@ -13,6 +13,7 @@ const NAV: Record<'business' | 'expert' | 'employer_partner' | 'admin', { href: 
     { href: '/capacity', label: 'Capacity' },
     { href: '/opportunities', label: 'Opportunities' },
     { href: '/engagements', label: 'Engagements' },
+    { href: '/employees', label: 'Team' },
     { href: '/messages', label: 'Messages' },
     { href: '/settings', label: 'Settings' },
   ],

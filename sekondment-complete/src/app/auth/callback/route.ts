@@ -6,12 +6,18 @@ export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get('code');
   const accountType = searchParams.get('account_type') as AccountType | null;
+  const signupIntent = searchParams.get('signup_intent');
   const next = searchParams.get('next') ?? '/dashboard';
 
   if (code) {
     const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
+      // Persist the UI persona (business/expert/employee) onto the user so the
+      // onboarding page can ask the employee deployment question.
+      if (signupIntent) {
+        await supabase.auth.updateUser({ data: { signup_intent: signupIntent } });
+      }
       // OAuth can't carry account_type through the provider, so the
       // handle_new_user trigger may have defaulted a new user to 'expert'.
       // If this OAuth flow specified a different intended type AND the account
