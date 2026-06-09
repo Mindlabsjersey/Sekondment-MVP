@@ -4,6 +4,7 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import NotificationBell from '@/components/NotificationBell';
 import AppNav from '@/components/AppNav';
 import { createClient } from '@/lib/supabase/server';
+import { getPlatformRole } from '@/lib/platform/access';
 import type { AccountType } from '@/lib/types/database';
 
 const NAV: Record<'business' | 'expert' | 'employer_partner' | 'admin', { href: string; label: string }[]> = {
@@ -14,6 +15,7 @@ const NAV: Record<'business' | 'expert' | 'employer_partner' | 'admin', { href: 
     { href: '/engagements', label: 'Engagements' },
     { href: '/messages', label: 'Messages' },
     { href: '/employees', label: 'Team' },
+    { href: '/teams', label: 'Find a Team' },
     { href: '/saved', label: 'Saved' },
     { href: '/capacity', label: 'Capacity' },
     { href: '/settings', label: 'Settings' },
@@ -83,6 +85,10 @@ export default async function AppShell({
   }
   const initials = (profile?.name || 'S').trim().slice(0, 1).toUpperCase();
 
+  // Internal staff get a link into the Operations Centre (separate from the
+  // marketplace account-type nav). Safe: returns null for non-staff.
+  const platformRole = user ? await getPlatformRole() : null;
+
   return (
     <div className="min-h-screen relative z-10">
       <nav className="sticky top-0 z-50 backdrop-blur-md bg-paper/80 border-b border-[var(--line)]">
@@ -95,6 +101,12 @@ export default async function AppShell({
             <AppNav links={links} />
           </div>
           <div className="flex items-center gap-2.5">
+            {platformRole && (
+              <Link href="/platform"
+                className="hidden sm:inline-block px-3 py-1.5 rounded-lg text-sm font-medium bg-ink text-paper hover:opacity-90 transition">
+                Ops Centre
+              </Link>
+            )}
             {user && <NotificationBell userId={user.id} initial={notifs} />}
             <ThemeToggle />
             {profile && (
