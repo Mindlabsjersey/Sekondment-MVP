@@ -72,12 +72,20 @@ function isActive(pathname: string, href: string) {
  * Redesigned navigation with even spacing, icons, and visual depth.
  * Single line layout for desktop with proper spacing.
  */
-export default function AppNav({ links }: { links: NavLink[] }) {
+export default function AppNav({ links, moreLinks = [] }: { links: NavLink[]; moreLinks?: NavLink[] }) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
 
-  // Close mobile menu on route change.
-  useEffect(() => { setMobileOpen(false); }, [pathname]);
+  // Close menus on route change.
+  useEffect(() => { setMobileOpen(false); setMoreOpen(false); }, [pathname]);
+  // Close more dropdown when clicking outside
+  useEffect(() => {
+    if (!moreOpen) return;
+    const handler = () => setMoreOpen(false);
+    document.addEventListener('click', handler, { once: true });
+    return () => document.removeEventListener('click', handler);
+  }, [moreOpen]);
 
   const NavItem = ({ link, mobile = false }: { link: NavLink; mobile?: boolean }) => {
     const active = isActive(pathname, link.href);
@@ -118,12 +126,49 @@ export default function AppNav({ links }: { links: NavLink[] }) {
 
   return (
     <>
-      {/* Desktop - Evenly spaced single line */}
+      {/* Desktop - Evenly spaced single line with More dropdown */}
       <nav className="hidden lg:flex items-center justify-center flex-1 px-4">
         <div className="flex items-center gap-1 bg-paper-2/50 rounded-2xl p-1.5 border border-[var(--line)]/50">
           {links.map((link) => (
             <NavItem key={link.href} link={link} />
           ))}
+          {moreLinks.length > 0 && (
+            <div className="relative">
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); setMoreOpen((v) => !v); }}
+                className={`group flex items-center gap-2 px-3 py-2 rounded-xl text-[13px] font-medium transition-all whitespace-nowrap ${
+                  moreOpen || moreLinks.some(l => isActive(pathname, l.href))
+                    ? 'text-ink bg-paper-3 shadow-sm'
+                    : 'text-ink/60 hover:text-ink hover:bg-paper-2'
+                }`}
+              >
+                <Icons.menu className="w-4 h-4" />
+                <span>More</span>
+              </button>
+              {moreOpen && (
+                <div className="absolute top-full right-0 mt-2 w-48 bg-paper rounded-xl shadow-2xl border border-[var(--line)] z-50 p-2">
+                  {moreLinks.map((link) => {
+                    const MoreIcon = link.icon && Icons[link.icon] ? Icons[link.icon] : null;
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                          isActive(pathname, link.href)
+                            ? 'bg-moss/10 text-moss'
+                            : 'text-ink/70 hover:bg-paper-2 hover:text-ink'
+                        }`}
+                      >
+                        {MoreIcon && <MoreIcon className="w-4 h-4 text-ink/50" />}
+                        {link.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </nav>
 
@@ -154,11 +199,20 @@ export default function AppNav({ links }: { links: NavLink[] }) {
             className="lg:hidden fixed inset-0 bg-ink/20 backdrop-blur-sm z-40"
             onClick={() => setMobileOpen(false)}
           />
-          <div className="lg:hidden fixed top-[72px] left-4 right-4 bg-paper rounded-2xl shadow-2xl border border-[var(--line)] z-50 p-3 animate-in slide-in-from-top-2">
+          <div className="lg:hidden fixed top-[72px] left-4 right-4 bg-paper rounded-2xl shadow-2xl border border-[var(--line)] z-50 p-3 animate-in slide-in-from-top-2 max-h-[70vh] overflow-y-auto">
             <div className="grid gap-1">
               {links.map((link) => (
                 <NavItem key={link.href} link={link} mobile />
               ))}
+              {moreLinks.length > 0 && (
+                <>
+                  <div className="h-px bg-[var(--line)] my-2" />
+                  <p className="px-4 py-1 text-xs font-semibold text-muted uppercase tracking-wide">More</p>
+                  {moreLinks.map((link) => (
+                    <NavItem key={link.href} link={link} mobile />
+                  ))}
+                </>
+              )}
             </div>
           </div>
         </>

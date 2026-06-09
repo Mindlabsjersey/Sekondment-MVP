@@ -14,19 +14,13 @@ const NAV: Record<'business' | 'expert' | 'admin', { href: string; label: string
     { href: '/opportunities', label: 'Opportunities', icon: 'briefcase' },
     { href: '/engagements', label: 'Engagements', icon: 'chart' },
     { href: '/messages', label: 'Messages', icon: 'message' },
-    { href: '/employees', label: 'Team', icon: 'users' },
-    { href: '/teams', label: 'Find a Team', icon: 'users' },
-    { href: '/saved', label: 'Saved', icon: 'bookmark' },
-    { href: '/capacity', label: 'Capacity', icon: 'chart' },
-    { href: '/settings', label: 'Settings', icon: 'settings' },
+    { href: '/employees', label: 'My Team', icon: 'users' },
   ],
   expert: [
     { href: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
     { href: '/opportunities', label: 'Find Work', icon: 'briefcase' },
-    { href: '/saved', label: 'Saved', icon: 'bookmark' },
     { href: '/engagements', label: 'Engagements', icon: 'chart' },
     { href: '/messages', label: 'Messages', icon: 'message' },
-    { href: '/settings', label: 'Settings', icon: 'settings' },
   ],
   admin: [
     { href: '/admin/disputes', label: 'Disputes', icon: 'shield' },
@@ -34,6 +28,22 @@ const NAV: Record<'business' | 'expert' | 'admin', { href: string; label: string
     { href: '/admin/flagged', label: 'Flagged', icon: 'shield' },
     { href: '/admin/ledger', label: 'Ledger', icon: 'chart' },
     { href: '/admin/users', label: 'Users', icon: 'users' },
+  ],
+};
+
+// Overflow items shown in "More" dropdown
+const MORE: Record<'business' | 'expert' | 'admin', { href: string; label: string; icon: string }[]> = {
+  business: [
+    { href: '/teams', label: 'Find a Team', icon: 'users' },
+    { href: '/saved', label: 'Saved', icon: 'bookmark' },
+    { href: '/capacity', label: 'Capacity', icon: 'chart' },
+    { href: '/settings', label: 'Settings', icon: 'settings' },
+  ],
+  expert: [
+    { href: '/saved', label: 'Saved', icon: 'bookmark' },
+    { href: '/settings', label: 'Settings', icon: 'settings' },
+  ],
+  admin: [
     { href: '/admin/compliance', label: 'Compliance', icon: 'shield' },
     { href: '/admin/activity', label: 'Activity', icon: 'chart' },
     { href: '/admin/expertise', label: 'Expertise', icon: 'search' },
@@ -52,6 +62,7 @@ export default async function AppShell({
   const effectiveType: 'business' | 'expert' | 'admin' =
     accountType === 'employer_partner' ? 'business' : (accountType as any) ?? 'expert';
   const links = NAV[effectiveType] ?? NAV.expert;
+  const moreLinks = MORE[effectiveType] ?? [];
 
   // Batch all data loads to minimize round-trips.
   const supabase = await createClient();
@@ -93,7 +104,7 @@ export default async function AppShell({
           </Link>
 
           {/* Centered Navigation */}
-          <AppNav links={links} />
+          <AppNav links={links} moreLinks={moreLinks} />
 
           {/* Right Actions */}
           <div className="flex items-center gap-2 flex-shrink-0">
