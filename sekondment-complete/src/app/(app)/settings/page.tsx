@@ -7,6 +7,7 @@ import LogoUpload from './LogoUpload';
 import VerificationUpload from './VerificationUpload';
 import ExpertisePicker from './ExpertisePicker';
 import CVImport from './CVImport';
+import EmployerSettings from './EmployerSettings';
 
 export default async function SettingsPage() {
   const supabase = await createClient();
@@ -24,7 +25,14 @@ export default async function SettingsPage() {
     const { data } = await supabase.from('expert_profiles').select('*').eq('account_id', user.id).single();
     profile = data;
   } else if (type === 'business') {
-    const { data } = await supabase.from('business_profiles').select('*').eq('account_id', user.id).single();
+    const { data } = await supabase.from('business_profiles').select(`
+      *,
+      default_approval_required,
+      default_revenue_share_employer_pct,
+      default_revenue_share_employee_pct,
+      max_hours_per_week,
+      allow_external_projects
+    `).eq('account_id', user.id).single();
     profile = data;
   }
 
@@ -73,6 +81,7 @@ export default async function SettingsPage() {
           <ProfileEditor type={type} profile={profile} email={account.email} />
           {type === 'expert' && <ExpertisePicker existing={expertiseTags} />}
           {type === 'expert' && <CVImport />}
+          {type === 'business' && <EmployerSettings profile={profile} />}
           {type !== 'admin' && <VerificationUpload existing={verifDocs ?? []} />}
         </>
       ) : (

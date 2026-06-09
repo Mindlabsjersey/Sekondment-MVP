@@ -88,3 +88,40 @@ export async function saveProfileImage(url: string) {
   revalidatePath('/', 'layout');
   return { success: true };
 }
+
+// ─── SAVE EMPLOYER SETTINGS ─────────────────────────────────────────────────
+// Business-level defaults for employee management: approval rules,
+// revenue sharing, and availability restrictions.
+export async function saveEmployerSettings(settings: {
+  default_approval_required?: boolean;
+  default_revenue_share_employer_pct?: number;
+  default_revenue_share_employee_pct?: number;
+  max_hours_per_week?: number;
+  allow_external_projects?: boolean;
+}) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return { error: 'Not signed in.' };
+
+  const { data: profile } = await supabase
+    .from('business_profiles')
+    .select('id')
+    .eq('account_id', user.id)
+    .single();
+  if (!profile) return { error: 'Business profile not found.' };
+
+  const { error } = await supabase
+    .from('business_profiles')
+    .update({
+      default_approval_required: settings.default_approval_required,
+      default_revenue_share_employer_pct: settings.default_revenue_share_employer_pct,
+      default_revenue_share_employee_pct: settings.default_revenue_share_employee_pct,
+      max_hours_per_week: settings.max_hours_per_week,
+      allow_external_projects: settings.allow_external_projects,
+    })
+    .eq('id', profile.id);
+
+  if (error) return { error: error.message };
+  revalidatePath('/settings');
+  return { success: true };
+}

@@ -107,10 +107,19 @@ export default async function ExpertsPage({
     <AppShell accountType={account.account_type}>
       <div className="flex items-end justify-between flex-wrap gap-4 mb-7">
         <div>
-          <h1 className="font-serif text-4xl tracking-tight">Find expertise</h1>
-          <p className="text-muted mt-1">Browse verified experts, advisors and company resources.</p>
+          <h1 className="font-serif text-4xl tracking-tight">Find talent</h1>
+          <p className="text-muted mt-1">
+            Hire independent <span className="text-moss font-medium">Experts</span> or deployed <span className="text-sand font-medium">Employees</span> from other businesses.
+          </p>
         </div>
-        <span className="text-sm text-muted">{filtered.length} expert{filtered.length !== 1 ? 's' : ''}</span>
+        <div className="flex items-center gap-3">
+          <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-moss/10 text-moss">
+            {filtered.filter((e: any) => !e.employing_business_id).length} Experts
+          </span>
+          <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-sand/20 text-sand">
+            {filtered.filter((e: any) => !!e.employing_business_id).length} Employees
+          </span>
+        </div>
       </div>
 
       <div className="grid lg:grid-cols-[260px_1fr] gap-8 items-start">
@@ -127,29 +136,45 @@ export default async function ExpertsPage({
           )}
           {filtered.map((e: any) => {
             const avail = e.expert_availability;
-            const isResource = !!e.employing_business_id || !!e.employer_partner_id;
-            const companyName = e.employer_partners?.company_name ?? e.business_profiles?.company_name;
+            const isEmployee = !!e.employing_business_id;
+            const companyName = e.business_profiles?.company_name;
             const indKey = industryKey(e.industries);
             const indName = industryLabel(e.industries);
 
             return (
               <Link key={e.id} href={`/experts/${e.id}`} data-industry={indKey}
-                className="bg-surface border border-[var(--line)] rounded-xl p-5 flex gap-4 items-start hover:shadow-soft hover:-translate-y-0.5 transition-all"
+                className="bg-surface border border-[var(--line)] rounded-xl p-5 flex gap-4 items-start hover:shadow-soft hover:-translate-y-0.5 transition-all group"
                 style={{ borderLeft: '4px solid var(--c-industry, var(--c-blue))' }}>
-                {/* avatar — industry tinted */}
-                <div className="w-12 h-12 rounded-xl text-white flex items-center justify-center font-serif font-semibold text-base flex-none"
-                  style={{ background: 'linear-gradient(135deg, var(--c-industry, var(--c-blue)), var(--c-industry, var(--c-blue)))' }}>
+                {/* avatar — different style for employee vs expert */}
+                <div className={`w-12 h-12 rounded-xl text-white flex items-center justify-center font-serif font-semibold text-base flex-none ${
+                  isEmployee 
+                    ? 'bg-gradient-to-br from-sand to-sand/70' 
+                    : ''
+                }`}
+                  style={isEmployee ? {} : { background: 'linear-gradient(135deg, var(--c-industry, var(--c-blue)), var(--c-industry, var(--c-blue)))' }}>
                   {e.name.split(' ').map((n: string) => n[0]).join('').slice(0, 2)}
                 </div>
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="font-serif font-semibold text-lg">{e.name}</span>
+                    <span className="font-serif font-semibold text-lg group-hover:text-moss transition-colors">{e.name}</span>
+                    
+                    {/* Employee vs Expert badge - KEY DIFFERENTIATOR */}
+                    {isEmployee ? (
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sand/20 text-sand border border-sand/30">
+                        EMPLOYEE
+                      </span>
+                    ) : (
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-moss/10 text-moss border border-moss/20">
+                        EXPERT
+                      </span>
+                    )}
+                    
                     {e.verification_status === 'verified' && (
                       <span className="badge-verified text-[10px]">✓ VERIFIED</span>
                     )}
-                    {isResource && companyName && (
-                      <span className="text-xs font-semibold text-sand">via {companyName}</span>
+                    {isEmployee && companyName && (
+                      <span className="text-xs font-medium text-ink/60">via {companyName}</span>
                     )}
                   </div>
                   {e.headline && <p className="text-muted text-sm mt-0.5 mb-2">{e.headline}</p>}
@@ -169,10 +194,20 @@ export default async function ExpertsPage({
                       </span>
                     )}
                   </div>
-                  {e.categories?.length > 0 && (
+                  {/* Availability indicators */}
+                  {avail?.availability_type && (
                     <div className="flex flex-wrap gap-1.5 mt-2">
-                      {(e.categories as ExpertCategory[]).slice(0, 3).map((c) => (
-                        <span key={c} className="text-xs text-moss font-medium">{CATEGORY_LABELS[c]}</span>
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
+                        avail.availability_type === 'available_now' 
+                          ? 'bg-moss/10 text-moss' 
+                          : 'bg-paper-2 text-muted'
+                      }`}>
+                        {AVAIL_LABELS[avail.availability_type] || avail.availability_type}
+                      </span>
+                      {avail.work_modes?.map((mode: string) => (
+                        <span key={mode} className="text-xs px-2 py-0.5 rounded-full bg-paper-2 text-muted">
+                          {mode.replace('_', ' ')}
+                        </span>
                       ))}
                     </div>
                   )}
