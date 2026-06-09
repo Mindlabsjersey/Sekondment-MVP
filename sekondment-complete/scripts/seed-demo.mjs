@@ -148,6 +148,11 @@ async function main() {
     { biz: 'lumio', title: 'ISO27001 readiness', industry: 'Technology',
       oc: 'improve_compliance', desc: 'ISO27001 implementation plan + controls in place', min: 12000, max: 25000, mode: 'remote', exp: ['iso27001-implementation'] },
   ];
+  // Idempotent: clear demo businesses' existing opportunities first (cascades to
+  // requirements/interest) so re-running the seed doesn't duplicate them.
+  for (const id of Object.values(bizIds)) {
+    if (id) await db.from('opportunities').delete().eq('business_id', id);
+  }
   const oppIds = [];
   for (const o of opps) {
     if (!bizIds[o.biz]) continue;
@@ -169,7 +174,10 @@ async function main() {
   console.log(`  ✓ ${oppIds.length} opportunities`);
 
   // ── A COMPLETED ENGAGEMENT (so money & reviews exist) ───────────────────
+  // Idempotent: clear any prior demo engagement for this pair first (cascades to
+  // milestones/ledger/reviews) so re-running the seed never duplicates money rows.
   if (bizIds.lumio && expertIds.priya) {
+    await db.from('engagements').delete().eq('business_id', bizIds.lumio).eq('expert_id', expertIds.priya);
     const acc = (await db.from('expert_profiles').select('account_id').eq('id', expertIds.priya).single()).data?.account_id;
     const { data: eng } = await db.from('engagements').insert({
       opportunity_id: oppIds[0] ?? null, business_id: bizIds.lumio, expert_id: expertIds.priya,
@@ -204,6 +212,9 @@ async function main() {
   }
 
   // ── CRM leads (so the Ops Centre CRM has rows) ──────────────────────────
+  // Idempotent: remove prior demo leads by name before re-inserting.
+  await db.from('crm_leads').delete().in('company_name',
+    ['Channel Islands Bank', 'Dubai FinServ Group', 'Galway Tech']).then(() => {}, () => {});
   await db.from('crm_leads').insert([
     { company_name: 'Channel Islands Bank', contact_name: 'R. Le Brun', country: 'Jersey', industry: 'Finance', stage: 'demo_booked', estimated_value: 25000, lead_source: 'referral' },
     { company_name: 'Dubai FinServ Group', contact_name: 'A. Hassan', country: 'UAE', industry: 'Finance', stage: 'contacted', estimated_value: 60000, lead_source: 'outbound' },
