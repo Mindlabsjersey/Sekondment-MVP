@@ -33,7 +33,12 @@ if (!conn) {
 }
 
 const migrationsDir = join(root, 'supabase', 'migrations');
-const files = readdirSync(migrationsDir).filter((f) => f.endsWith('.sql')).sort();
+// Optional CLI args: filename prefixes to apply ONLY those migrations, e.g.
+//   node scripts/apply-migrations.mjs 0030 0031 0032
+// No args = apply all (original behaviour, for a fresh database).
+const only = process.argv.slice(2);
+let files = readdirSync(migrationsDir).filter((f) => f.endsWith('.sql')).sort();
+if (only.length) files = files.filter((f) => only.some((p) => f.startsWith(p)));
 
 const client = new pg.Client({
   connectionString: conn,

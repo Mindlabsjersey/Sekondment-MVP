@@ -25,7 +25,7 @@ export async function POST(
 
   const { data: eng } = await supabase
     .from('engagements')
-    .select(`id, currency, payee_type, payee_account_id, resource_split_to_expert,
+    .select(`id, currency, payee_type, payee_account_id, resource_split_to_expert, platform_fee_pct,
              business_id, expert_id, business_profiles!inner(account_id)`)
     .eq('id', id)
     .single();
@@ -89,6 +89,7 @@ export async function POST(
       primaryStripeAccount: payee.stripe_account_id,
       resourceSplitToExpert: eng.resource_split_to_expert,
       expertStripeAccount,
+      feePct: eng.platform_fee_pct != null ? Number(eng.platform_fee_pct) : undefined,
     });
 
     transfers = await releaseMilestone({

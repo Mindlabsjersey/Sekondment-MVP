@@ -24,6 +24,9 @@ export interface SplitInput {
   resourceSplitToExpert?: number | null;
   /** Required when resourceSplitToExpert > 0: the individual's connected account. */
   expertStripeAccount?: string | null;
+  /** Platform fee % for THIS engagement (snapshotted at creation). Falls back to
+   *  the site default constant if not supplied, so existing callers still work. */
+  feePct?: number | null;
 }
 
 export interface SplitLine {
@@ -46,7 +49,9 @@ export interface SplitResult {
  */
 export function computeSplit(input: SplitInput): SplitResult {
   const grossMinor = toMinor(input.amountPounds);
-  const feeMinor = Math.round((grossMinor * PLATFORM_FEE_PCT) / 100);
+  // Use the engagement's locked rate when provided; else the site default constant.
+  const feePct = input.feePct != null ? input.feePct : PLATFORM_FEE_PCT;
+  const feeMinor = Math.round((grossMinor * feePct) / 100);
   const netMinor = grossMinor - feeMinor;
 
   const lines: SplitLine[] = [];

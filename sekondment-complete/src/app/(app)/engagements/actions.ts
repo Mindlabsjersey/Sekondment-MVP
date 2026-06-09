@@ -96,6 +96,11 @@ export async function acceptProposal(proposalId: string) {
   const total = Number(proposal.price ?? 0);
   if (total <= 0) return { error: 'Proposal has no price set.' };
 
+  // Snapshot the platform fee that applies to this business NOW, so the rate
+  // locks onto the engagement and never changes for in-flight deals.
+  const { data: feeRow } = await svc.rpc('resolve_fee_pct', { p_business_id: opp.business_id });
+  const lockedFeePct = typeof feeRow === 'number' ? feeRow : 15;
+
   // Create engagement + milestones (service client; money state is authoritative server-side).
   const { data: engagement, error: engErr } = await svc
     .from('engagements')
@@ -112,6 +117,7 @@ export async function acceptProposal(proposalId: string) {
       rate_type: proposal.rate_type,
       currency: 'GBP',
       status: 'active',
+      platform_fee_pct: lockedFeePct,
     })
     .select('id')
     .single();

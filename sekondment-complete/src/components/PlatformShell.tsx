@@ -6,6 +6,7 @@ const MODULES: { key: string; href: string; label: string }[] = [
   { key: 'executive',   href: '/platform',            label: 'Executive' },
   { key: 'revenue',     href: '/platform/revenue',    label: 'Revenue' },
   { key: 'payments',    href: '/platform/payments',   label: 'Payments' },
+  { key: 'revenue',     href: '/platform/commission',  label: 'Commission' },
   { key: 'marketplace', href: '/platform/marketplace',label: 'Marketplace' },
   { key: 'expertise',   href: '/platform/expertise',  label: 'Expertise' },
   { key: 'capacity',    href: '/platform/capacity',   label: 'Capacity' },
@@ -14,8 +15,11 @@ const MODULES: { key: string; href: string; label: string }[] = [
   { key: 'trust',       href: '/platform/trust',      label: 'Trust' },
   { key: 'growth',      href: '/platform/growth',     label: 'Growth' },
   { key: 'crm',         href: '/platform/crm',        label: 'CRM' },
+  { key: 'marketplace', href: '/platform/delivery',   label: 'Delivery' },
+  { key: 'marketplace', href: '/platform/concierge',  label: 'Concierge' },
   { key: 'team',        href: '/platform/team',       label: 'Team' },
   { key: 'audit',       href: '/platform/audit',      label: 'Audit logs' },
+  { key: 'audit',       href: '/platform/exports',    label: 'Exports' },
   { key: 'system',      href: '/platform/system',     label: 'System health' },
 ];
 

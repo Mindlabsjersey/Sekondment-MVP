@@ -1,8 +1,8 @@
--- Sekondment — combined migrations (auto-generated, in order)
--- ⚠ Enum 'add value'/'create type' files (0005,0015,0023,0026) need own transaction.
--- If combined errors on enum usage, run individual files in order instead.
+-- AUTO-GENERATED: concatenation of all migrations in order. Do not edit by hand.
 
--- ===== 0001_core_schema.sql =====
+-- ============================================================
+-- 0001_core_schema.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0001 CORE SCHEMA
 -- Accounts, profiles, verification, trust score, and the Company Resource
@@ -183,7 +183,10 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function handle_new_user();
 
--- ===== 0002_marketplace.sql =====
+
+-- ============================================================
+-- 0002_marketplace.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0002 MARKETPLACE & ENGAGEMENT SCHEMA
 -- Opportunities, discovery/favourites, messaging, and the engagement workspace.
@@ -319,7 +322,10 @@ create table messages (
 
 create index idx_messages_conversation on messages(conversation_id, created_at);
 
--- ===== 0003_payments.sql =====
+
+-- ============================================================
+-- 0003_payments.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0003 PAYMENTS, ESCROW, DISPUTES, REVIEWS
 -- Stripe Connect "separate charges & transfers" model. The platform balance
@@ -450,7 +456,10 @@ create table activity_events (
 
 create index idx_activity_engagement on activity_events(engagement_id, created_at);
 
--- ===== 0004_rls.sql =====
+
+-- ============================================================
+-- 0004_rls.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0004 ROW LEVEL SECURITY
 -- Multi-tenant isolation. Helpers resolve the caller's profile ids; policies
@@ -625,7 +634,10 @@ create policy dispute_raise on disputes for insert with check (
 create policy reviews_read on reviews for select using (true);
 create policy reviews_write on reviews for insert with check (reviewer_id = auth.uid());
 
--- ===== 0005_enum_additions.sql =====
+
+-- ============================================================
+-- 0005_enum_additions.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0005a  ENUM ADDITIONS (must run & commit BEFORE 0005)
 -- Postgres forbids using a newly added enum value in the same transaction that
@@ -639,7 +651,10 @@ alter type account_type add value if not exists 'employer_partner';
 -- An engagement can now pay an expert, a business, or an employer partner.
 alter type payee_type add value if not exists 'employer_partner';
 
--- ===== 0006_partners_rates_proposals.sql =====
+
+-- ============================================================
+-- 0006_partners_rates_proposals.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0005  EMPLOYER PARTNERS · RATE TYPES · PROPOSALS
 -- Additive migration. Reflects the agreed decisions:
@@ -772,7 +787,10 @@ create trigger trg_proposals_updated before update on proposals
 -- link an accepted proposal to the engagement it produced
 alter table engagements add column proposal_id uuid references proposals(id) on delete set null;
 
--- ===== 0007_rls_partners_proposals.sql =====
+
+-- ============================================================
+-- 0007_rls_partners_proposals.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0007  RLS FOR NEW TABLES
 -- employer_partners · employer_employees · proposals
@@ -830,7 +848,10 @@ create policy proposals_business_update on proposals for update
   using (exists (select 1 from opportunities o where o.id = opportunity_id and o.business_id = my_business_id()))
   with check (exists (select 1 from opportunities o where o.id = opportunity_id and o.business_id = my_business_id()));
 
--- ===== 0008_realtime_messages.sql =====
+
+-- ============================================================
+-- 0008_realtime_messages.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0008  ENABLE REALTIME ON MESSAGES
 -- Adds the messages table to the supabase_realtime publication so clients can
@@ -851,7 +872,10 @@ alter publication supabase_realtime add table messages;
 -- Ensure full row data is available to realtime payloads.
 alter table messages replica identity full;
 
--- ===== 0009_opportunity_visibility.sql =====
+
+-- ============================================================
+-- 0009_opportunity_visibility.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0009  OPPORTUNITY VISIBILITY (public / private)
 -- Businesses (and employer partners posting work) can mark an opportunity as
@@ -897,7 +921,10 @@ create policy opp_read on opportunities for select using (
 -- by the existing anon select grant on public, scoped here to visibility=public
 -- and status<>'draft'. The app-layer browse queries also filter explicitly.
 
--- ===== 0010_expert_visibility.sql =====
+
+-- ============================================================
+-- 0010_expert_visibility.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0010  EXPERT PROFILE VISIBILITY
 -- Experts (incl. company resources and freelancers) can choose whether their
@@ -931,7 +958,10 @@ create policy expert_read on expert_profiles for select using (
   )
 );
 
--- ===== 0011_notifications.sql =====
+
+-- ============================================================
+-- 0011_notifications.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0011  IN-APP NOTIFICATIONS
 -- Lightweight notification feed shown in the nav bell, complementing emails.
@@ -976,7 +1006,10 @@ end $$;
 alter publication supabase_realtime add table notifications;
 alter table notifications replica identity full;
 
--- ===== 0012_files_and_boards.sql =====
+
+-- ============================================================
+-- 0012_files_and_boards.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0012  SECURE FILES + ENGAGEMENT BOARDS
 -- (a) Storage bucket policies so files live inside the same RLS perimeter as
@@ -1092,7 +1125,10 @@ alter publication supabase_realtime add table board_columns;
 alter table board_cards replica identity full;
 alter table board_columns replica identity full;
 
--- ===== 0013_global_currency_country.sql =====
+
+-- ============================================================
+-- 0013_global_currency_country.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0013  GLOBAL READINESS: CURRENCY + COUNTRY
 -- Sekondment is GBP-first (Jersey test market) but global from day one. Carry
@@ -1117,7 +1153,10 @@ alter table expert_profiles
 create index idx_accounts_country on accounts(country);
 create index idx_opportunities_currency on opportunities(currency);
 
--- ===== 0014_terms_agreements.sql =====
+
+-- ============================================================
+-- 0014_terms_agreements.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0014  TERMS, AGREEMENTS & ACCEPTANCE
 -- Sekondment facilitates engagements; it does not legally "own the jobs".
@@ -1198,7 +1237,10 @@ insert into legal_documents (kind, version, jurisdiction, title, body) values
  || 'the in-platform resolution process. Intellectual property transfers on full '
  || 'payment unless otherwise agreed in writing within the engagement.');
 
--- ===== 0015_milestone_releasing_enum.sql =====
+
+-- ============================================================
+-- 0015_milestone_releasing_enum.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0015  MILESTONE 'releasing' STATUS
 -- Transient claim status used by the release route to atomically move
@@ -1207,7 +1249,10 @@ insert into legal_documents (kind, version, jurisdiction, title, body) values
 -- =============================================================================
 alter type milestone_status add value if not exists 'releasing';
 
--- ===== 0016_security_hardening.sql =====
+
+-- ============================================================
+-- 0016_security_hardening.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0015  SECURITY HARDENING (column-level write guards)
 -- RLS policies grant row access but cannot restrict *which columns* a user
@@ -1311,7 +1356,10 @@ drop trigger if exists trg_guard_ledger_delete on ledger_entries;
 create trigger trg_guard_ledger_delete before delete on ledger_entries
   for each row execute function public.guard_ledger_append_only();
 
--- ===== 0017_account_moderation.sql =====
+
+-- ============================================================
+-- 0017_account_moderation.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0017  ACCOUNT MODERATION
 -- Admin user management: status (active/warned/suspended), admin notes, and a
@@ -1344,7 +1392,10 @@ begin
   return new;
 end $$;
 
--- ===== 0018_global_fields.sql =====
+
+-- ============================================================
+-- 0018_global_fields.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0018  GLOBAL READINESS FIELDS
 -- Location, timezone and work-mode availability so users worldwide can sign up
@@ -1384,7 +1435,10 @@ create index idx_expert_remote             on expert_profiles(remote_available);
 create index idx_expert_based_country      on expert_profiles(based_country);
 create index idx_opportunities_country     on opportunities(country);
 
--- ===== 0019_contracts_compliance.sql =====
+
+-- ============================================================
+-- 0019_contracts_compliance.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0019  CONTRACTS, VERIFICATION & COMPLIANCE FOUNDATIONS
 -- Versioned engagement terms, reusable contract templates, formal verification
@@ -1576,7 +1630,10 @@ insert into contract_templates (slug, title, body) values
  || 'Attempting to move payment or communication off-platform to avoid fees or '
  || 'protections is a breach of the Platform Terms and may result in account action.');
 
--- ===== 0020_expertise_engine.sql =====
+
+-- ============================================================
+-- 0020_expertise_engine.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0020  EXPERTISE INTELLIGENCE ENGINE (schema)
 -- The moat: structured expertise so the marketplace is searchable by capability,
@@ -1764,7 +1821,10 @@ create policy match_read on match_recommendations for select using (
   ) or public.is_admin()
 );
 
--- ===== 0021_expertise_seed.sql =====
+
+-- ============================================================
+-- 0021_expertise_seed.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0021  EXPERTISE TAXONOMY SEED
 -- ~110 commercially valuable, AI-resistant expertise entries + key aliases.
@@ -1922,7 +1982,10 @@ where (a.slug, b.slug) in (
   ('board-advisory','corporate-governance')
 ) on conflict do nothing;
 
--- ===== 0022_capacity_marketplace.sql =====
+
+-- ============================================================
+-- 0022_capacity_marketplace.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0022  WORKFORCE CAPACITY MARKETPLACE
 -- Lets Employer Partners list CAPACITY (hours/days of a resource), not just
@@ -2062,7 +2125,10 @@ create policy caputil_read on capacity_utilisation_events for select using (
   public.owns_capacity(capacity_id) or public.is_admin()
 );
 
--- ===== 0023_expertise_graph_expansion.sql =====
+
+-- ============================================================
+-- 0023_expertise_graph_expansion.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0023  EXPERTISE GRAPH EXPANSION (Prompt 5)
 -- Deepens the expertise graph for the long-term moat: adds jurisdiction +
@@ -2078,7 +2144,10 @@ alter type expertise_type add value if not exists 'jurisdiction';
 alter type expertise_type add value if not exists 'service_category';
 alter type expertise_type add value if not exists 'platform';
 
--- ===== 0024_proof_and_intelligence.sql =====
+
+-- ============================================================
+-- 0024_proof_and_intelligence.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0024  PROOF DIMENSIONS + MARKETPLACE INTELLIGENCE (Prompt 5)
 -- Runs AFTER 0023 (which adds enum values in its own transaction).
@@ -2166,7 +2235,10 @@ begin
 end;
 $$;
 
--- ===== 0025_taxonomy_expansion.sql =====
+
+-- ============================================================
+-- 0025_taxonomy_expansion.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0025  EXPERTISE TAXONOMY EXPANSION (Prompt 5, Phase 7)
 -- Adds 148 expertise/jurisdiction/service records across priority sectors.
@@ -2326,7 +2398,10 @@ insert into expertise_taxonomy (name, slug, type, commercial_value_score, ai_res
   ('Staff Augmentation','staff-augmentation-service','service_category',55,60,'Service')
 on conflict (slug) do nothing;
 
--- ===== 0026_platform_roles_enum.sql =====
+
+-- ============================================================
+-- 0026_platform_roles_enum.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0026  PLATFORM OPERATIONS CENTRE — internal role enum (ISOLATED)
 -- Internal platform roles are SEPARATE from marketplace account types
@@ -2344,7 +2419,10 @@ create type platform_role as enum (
   'support_team'        -- tickets, basic profiles, notes
 );
 
--- ===== 0027_platform_ops_centre.sql =====
+
+-- ============================================================
+-- 0027_platform_ops_centre.sql
+-- ============================================================
 -- =============================================================================
 -- SEKONDMENT — 0027  PLATFORM OPERATIONS CENTRE — tables (runs AFTER 0026)
 -- Internal team membership, internal notes, audit logs, and CRM pipeline.
@@ -2486,3 +2564,199 @@ create policy tasks_staff on team_tasks for all
 -- NOTE: seed the first platform_owner manually after migrating, e.g.:
 --   insert into platform_team_members (account_id, role)
 --   select id, 'platform_owner' from accounts where email = 'joe@mindlabs.je';
+
+
+-- ============================================================
+-- 0028_ledger_idempotency.sql
+-- ============================================================
+-- =============================================================================
+-- SEKONDMENT — 0028  LEDGER IDEMPOTENCY
+-- Stripe legitimately retries webhook deliveries (e.g. payment_intent.succeeded).
+-- The webhook writes a 'fund' ledger row keyed on the PaymentIntent id; a retry
+-- would otherwise insert a DUPLICATE money row and corrupt reconciliation.
+--
+-- A partial unique index on (stripe_object_id, entry_type) makes each Stripe
+-- object record at most one ledger row per entry_type. NULL stripe_object_id is
+-- excluded so non-Stripe / future entries are unaffected (and Postgres treats
+-- NULLs as distinct anyway). This index also backs the webhook's conflict-safe
+-- upsert (ON CONFLICT DO NOTHING).
+--
+-- Note: 'fund' uses the PaymentIntent id, 'fee' uses the charge id, and each
+-- 'transfer_*' uses its own transfer id, so these never collide.
+-- =============================================================================
+
+-- Defensive: collapse any pre-existing duplicates before enforcing uniqueness.
+delete from ledger_entries a
+using ledger_entries b
+where a.ctid < b.ctid
+  and a.stripe_object_id is not null
+  and a.stripe_object_id = b.stripe_object_id
+  and a.entry_type = b.entry_type;
+
+create unique index if not exists ux_ledger_stripe_object_entry
+  on ledger_entries (stripe_object_id, entry_type)
+  where stripe_object_id is not null;
+
+
+-- ============================================================
+-- 0030_research_taxonomy.sql
+-- ============================================================
+-- =============================================================================
+-- SEKONDMENT — 0029  RESEARCH-BACKED TAXONOMY + DEMAND DATA (Prompt: research)
+-- 62 expertise records across 14 sectors, with commercial_value_score,
+-- ai_resistance_score and demand_weight set from 2026 market research (fractional
+-- leadership, cyber, AI/data, compliance, energy/HSE, healthcare, defence...).
+-- Idempotent. Runs after 0023 (enum types) / 0025 (earlier expansion).
+-- =============================================================================
+
+insert into expertise_taxonomy (name, slug, type, commercial_value_score, ai_resistance_score, demand_weight, industry_relevance_note) values
+  ('Machine Learning Engineering','machine-learning-engineering','expertise',86,60,100,'Data & AI'),
+  ('Agentic AI Development','agentic-ai-development','expertise',90,80,100,'Data & AI'),
+  ('LLM / Prompt Engineering','llm-prompt-engineering','expertise',78,40,100,'Data & AI'),
+  ('MLOps & Model Deployment','mlops-model-deployment','expertise',80,60,100,'Data & AI'),
+  ('AI Governance & Ethics','ai-governance-ethics','expertise',81,100,100,'Data & AI'),
+  ('Data Engineering','data-engineering','expertise',75,60,100,'Data & AI'),
+  ('Data Governance','data-governance','expertise',76,80,100,'Data & AI'),
+  ('Analytics Engineering (dbt)','analytics-engineering-dbt','expertise',73,60,80,'Data & AI'),
+  ('Fractional AI Officer','fractional-ai-officer','role',93,100,100,'Data & AI'),
+  ('Penetration Testing','penetration-testing','expertise',80,80,100,'Cyber Security'),
+  ('Security Architecture','security-architecture','expertise',83,80,100,'Cyber Security'),
+  ('Incident Response & Forensics','incident-response-forensics','expertise',81,80,100,'Cyber Security'),
+  ('Zero Trust Implementation','zero-trust-implementation','expertise',81,80,100,'Cyber Security'),
+  ('Cloud Security (CSPM)','cloud-security-cspm','expertise',80,80,100,'Cyber Security'),
+  ('AI Security / Red Teaming','ai-security-red-teaming','expertise',86,100,100,'Cyber Security'),
+  ('SOC2 Readiness','soc2-readiness','expertise',75,80,100,'Cyber Security'),
+  ('ISO27001 Implementation','iso27001-implementation','expertise',75,80,100,'Cyber Security'),
+  ('Fractional CISO','fractional-ciso','role',90,100,100,'Cyber Security'),
+  ('Cloud Architecture (AWS)','cloud-architecture-aws','expertise',78,60,100,'Technology'),
+  ('Azure Architecture','azure-architecture','expertise',76,60,80,'Technology'),
+  ('Kubernetes / Platform Engineering','kubernetes-platform-engineering','expertise',80,60,100,'Technology'),
+  ('Site Reliability Engineering','site-reliability-engineering','expertise',78,60,80,'Technology'),
+  ('Terraform / IaC','terraform-iac','expertise',76,60,80,'Technology'),
+  ('Stripe Connect Implementation','stripe-connect-implementation','expertise',75,60,80,'Technology'),
+  ('Microsoft 365 Migration','microsoft-365-migration','expertise',70,40,80,'Technology'),
+  ('Fractional CTO','fractional-cto','role',86,100,100,'Technology'),
+  ('AML Review','aml-review','expertise',71,80,100,'Finance'),
+  ('KYC Review','kyc-review','expertise',70,60,100,'Finance'),
+  ('Trust Administration','trust-administration','expertise',71,80,80,'Finance'),
+  ('Fund Administration','fund-administration','expertise',72,80,80,'Finance'),
+  ('Regulatory Reporting','regulatory-reporting','expertise',73,80,80,'Finance'),
+  ('Financial Modelling','financial-modelling','expertise',75,60,80,'Finance'),
+  ('Fractional CFO','fractional-cfo','role',86,100,100,'Leadership'),
+  ('Fractional Financial Controller','fractional-financial-controller','role',78,80,80,'Finance'),
+  ('Enterprise Risk Management','enterprise-risk-management','expertise',78,100,80,'Risk'),
+  ('Operational Resilience (DORA)','operational-resilience-dora','expertise',80,100,100,'Risk'),
+  ('Internal Audit','internal-audit','expertise',73,80,80,'Risk'),
+  ('Data Protection / GDPR','data-protection-gdpr','expertise',76,80,100,'Legal'),
+  ('Commercial Contracts','commercial-contracts','expertise',75,80,80,'Legal'),
+  ('M&A Legal Support','m&a-legal-support','expertise',83,100,80,'Legal'),
+  ('Meta Ads Lead Generation','meta-ads-lead-generation','expertise',67,40,80,'Marketing'),
+  ('Google Ads / PPC','google-ads-ppc','expertise',67,40,80,'Marketing'),
+  ('SEO Strategy','seo-strategy','expertise',66,40,60,'Marketing'),
+  ('HubSpot / Lifecycle Automation','hubspot-lifecycle-automation','expertise',68,40,80,'Marketing'),
+  ('Fractional CMO','fractional-cmo','role',81,80,100,'Marketing'),
+  ('Business Transformation','business-transformation','expertise',80,80,80,'Operations'),
+  ('Change Management','change-management','expertise',75,80,80,'Operations'),
+  ('Supply Chain Optimisation','supply-chain-optimisation','expertise',76,80,100,'Operations'),
+  ('Fractional COO','fractional-coo','role',85,100,100,'Leadership'),
+  ('PMO / Programme Management','pmo-programme-management','expertise',73,60,80,'Operations'),
+  ('Renewable Energy Project Management','renewable-energy-project-management','expertise',76,80,100,'Energy'),
+  ('Carbon Accounting & ESG Reporting','carbon-accounting-esg-reporting','expertise',75,80,100,'Energy'),
+  ('Grid Integration','grid-integration','expertise',78,80,80,'Energy'),
+  ('HSE / Health & Safety Management','hse-health-safety-management','expertise',71,80,100,'Construction'),
+  ('Quantity Surveying','quantity-surveying','expertise',73,80,80,'Construction'),
+  ('BIM Coordination','bim-coordination','expertise',71,60,80,'Construction'),
+  ('Clinical Governance','clinical-governance','expertise',75,100,100,'Healthcare'),
+  ('Medical Device Regulation','medical-device-regulation','expertise',78,100,100,'Healthcare'),
+  ('Health Informatics','health-informatics','expertise',76,80,80,'Healthcare'),
+  ('Lean Manufacturing / Six Sigma','lean-manufacturing-six-sigma','expertise',73,80,80,'Manufacturing'),
+  ('Industrial Automation','industrial-automation','expertise',76,80,100,'Manufacturing'),
+  ('Defence Procurement','defence-procurement','expertise',80,100,100,'Defence')
+on conflict (slug) do nothing;
+
+
+-- ============================================================
+-- 0031_configurable_commission.sql
+-- ============================================================
+-- =============================================================================
+-- SEKONDMENT — 0031  CONFIGURABLE COMMISSION
+-- Site-wide default platform fee (owner-controlled) + per-company override.
+-- The fee is SNAPSHOTTED onto each engagement at creation (engagements.
+-- platform_fee_pct already exists) so in-flight deals never change rate.
+-- Default stays 15%. Only the owner can change site-wide settings.
+-- =============================================================================
+
+-- ── SITE-WIDE PLATFORM SETTINGS (single row, owner-controlled) ──────────────
+create table if not exists platform_settings (
+  id                 int primary key default 1,
+  default_fee_pct    numeric(5,2) not null default 15.00 check (default_fee_pct >= 0 and default_fee_pct <= 100),
+  updated_by         uuid references accounts(id) on delete set null,
+  updated_at         timestamptz not null default now(),
+  constraint single_row check (id = 1)
+);
+insert into platform_settings (id, default_fee_pct) values (1, 15.00)
+  on conflict (id) do nothing;
+
+-- ── PER-COMPANY OVERRIDE (null = use site-wide default) ─────────────────────
+alter table business_profiles
+  add column if not exists fee_pct_override numeric(5,2) check (fee_pct_override >= 0 and fee_pct_override <= 100);
+
+-- ── RESOLVER: the fee that applies to a given business right now ────────────
+-- Per-company override wins; otherwise the site-wide default.
+create or replace function public.resolve_fee_pct(p_business_id uuid)
+returns numeric language sql stable security definer set search_path = public as $$
+  select coalesce(
+    (select fee_pct_override from business_profiles where id = p_business_id),
+    (select default_fee_pct from platform_settings where id = 1),
+    15.00
+  );
+$$;
+
+-- ── RLS: only platform owner may change site-wide settings ──────────────────
+alter table platform_settings enable row level security;
+create policy settings_read on platform_settings for select using (public.is_platform_staff());
+create policy settings_owner_write on platform_settings for all
+  using (public.is_platform_owner()) with check (public.is_platform_owner());
+
+-- NOTE: business_profiles.fee_pct_override is written only by platform staff via
+-- a server action (service role); the existing column-guard trigger should be
+-- extended so a business cannot set its own override. See 0016 hardening pattern.
+
+
+-- ============================================================
+-- 0032_concierge_matching.sql
+-- ============================================================
+-- =============================================================================
+-- SEKONDMENT — 0032  CONCIERGE MATCHING (cold-start solver)
+-- During early/low-liquidity periods, a business can request "find me experts"
+-- and the platform team (founder-led at first) sources + surfaces candidates,
+-- guaranteeing a response. Removes the empty-marketplace fear.
+-- Additive. No money path. Safe.
+-- =============================================================================
+
+create table if not exists concierge_requests (
+  id              uuid primary key default gen_random_uuid(),
+  business_id     uuid references business_profiles(id) on delete cascade,
+  opportunity_id  uuid references opportunities(id) on delete set null,
+  brief           text not null,                 -- what they need (plain language)
+  status          text not null default 'open',  -- open | sourcing | candidates_sent | closed
+  target_response_by timestamptz,                -- the guarantee (e.g. now + 24h)
+  handled_by      uuid references accounts(id) on delete set null,  -- which staff member
+  candidate_notes text,                          -- staff notes on who was sourced
+  created_at      timestamptz not null default now(),
+  updated_at      timestamptz not null default now()
+);
+create index if not exists idx_concierge_status on concierge_requests(status, created_at desc);
+
+alter table concierge_requests enable row level security;
+
+-- A business can see + create its own requests.
+create policy concierge_own_read on concierge_requests for select
+  using (business_id in (select id from business_profiles where account_id = auth.uid()));
+create policy concierge_own_insert on concierge_requests for insert
+  with check (business_id in (select id from business_profiles where account_id = auth.uid()));
+
+-- Platform staff can see + manage all (uses helper from the Ops Centre migration).
+create policy concierge_staff_all on concierge_requests for all
+  using (public.is_platform_staff()) with check (public.is_platform_staff());
+

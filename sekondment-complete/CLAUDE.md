@@ -1,3 +1,5 @@
+> **Start with CURRENT_STATE.md** — the accurate, up-to-date build inventory and direction.
+
 # CLAUDE.md — Sekondment
 
 This file is read automatically by Claude Code. It tells you how to work on this
@@ -59,3 +61,7 @@ trust_score, verification flags, account status/type, Stripe fields, ledger
 Royal blue (#1d4ed8) + gold (#c8a24a), light/dark via CSS-variable Tailwind tokens
 (`bg-paper`, `text-ink`, `bg-moss`=blue, `bg-sand`=gold). Per-industry accent via
 `data-industry`. Fraunces (serif) + Spline Sans. Keep formatting minimal & mobile-first.
+
+## BUILD JOURNAL — MANDATORY
+Keep BUILD_LOG.md (append-only, dated entry each session) and KNOWN_GAPS.md (move to
+RESOLVED when verified live; add new gaps) current every session. Part of the build.

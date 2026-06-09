@@ -1,3 +1,5 @@
+> **Start with CURRENT_STATE.md** — the accurate, up-to-date build inventory and direction.
+
 # AGENTS.md — Sekondment
 
 This file orients any AI coding agent (Devin, Claude Code, Cursor, etc.) working on

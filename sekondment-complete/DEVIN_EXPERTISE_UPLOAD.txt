@@ -1,0 +1,70 @@
+═══════════════════════════════════════════════════════════════════════════════
+DEVIN: EXPERTISE DATA INJECTION BUNDLE
+═══════════════════════════════════════════════════════════════════════════════
+
+This bundle adds 62 research-backed expertise records to Sekondment. Pure data,
+no schema changes, no code rewrites. Ready to merge and deploy.
+
+FILES IN THIS BUNDLE:
+─────────────────────────────────────────────────────────────────────────────
+
+1. INJECT_EXPERTISE.md
+   → START HERE. Full instructions on what to do, what data is included, 
+     and why. Read before running anything.
+
+2. supabase/migrations/0030_research_taxonomy.sql
+   → The SQL migration. Adds 62 expertise records to expertise_taxonomy.
+   → Run after 0001→0028 (incl. Cascade's 0028) have been applied.
+   → Safe: uses ON CONFLICT (slug) DO NOTHING.
+
+3. data/expertise-research.json
+   → 62 records with day rates, demand levels, AI-resistance scores, sourced
+     from 2026 market research on fractional/interim work.
+   → Reference only (not for DB seeding). Shows the thinking behind the data.
+
+4. data/proven-expertise-samples.json
+   → 158 sample profile_expertise records (93 proven, 46 verified, 19 declared).
+   → For understanding the three-tier proof model structure only.
+   → Do NOT insert into DB (these are illustrative).
+
+5. DEVIN_EXPERTISE_UPLOAD.txt
+   → This file. Quick orientation.
+
+QUICK START:
+─────────────────────────────────────────────────────────────────────────────
+
+1. Read INJECT_EXPERTISE.md
+2. When ready to deploy: run migration 0030_research_taxonomy.sql on live Supabase
+3. That's it. Everything else (matching, Ops Centre, profile linking) works unchanged.
+
+KEY POINT:
+─────────────────────────────────────────────────────────────────────────────
+
+This is a DATA-ONLY injection. Do NOT:
+  • Rewrite code
+  • Change schemas
+  • Alter the matching engine
+  • Redesign the app
+
+The expertise_taxonomy, profile_expertise, and matching engine ALREADY handle
+generic expertise linking. We're just populating it with 62 new things.
+
+SECTORS COVERED:
+─────────────────────────────────────────────────────────────────────────────
+
+Data&AI, Cyber Security, Technology, Finance, Leadership, Risk&Legal, Marketing,
+Operations, Energy, Construction, Healthcare, Manufacturing, Defence.
+
+From ML Engineering and Fractional CISO to HSE Management and Medical Device
+Regulation — the kinds of work that justify fractional/project engagement.
+
+UPLOAD INSTRUCTIONS:
+─────────────────────────────────────────────────────────────────────────────
+
+In Devin:
+  1. Upload this entire bundle as a folder/attachment
+  2. Tell Devin: "Follow INJECT_EXPERTISE.md — add the expertise data to the live app"
+  3. It will read the instructions, apply the migration when ready, reference the JSON for verification
+
+The bundle is in sekondment-complete.zip along with the full repo (migrations
+0001→0029, source, docs).

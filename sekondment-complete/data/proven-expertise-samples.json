@@ -1,0 +1,2203 @@
+{
+  "proven_expertise_samples": [
+    {
+      "expert": "Owen Allen",
+      "expertise": "Machine Learning Engineering",
+      "sector": "Data & AI",
+      "level": "declared",
+      "years": 7,
+      "completed_engagements": 1,
+      "avg_rating": 4.5,
+      "day_rate": 1050,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "Mei Walsh",
+      "expertise": "Machine Learning Engineering",
+      "sector": "Data & AI",
+      "level": "proven",
+      "years": 13,
+      "completed_engagements": 4,
+      "avg_rating": 4.6,
+      "day_rate": 1050,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Aisha Reed",
+      "expertise": "Machine Learning Engineering",
+      "sector": "Data & AI",
+      "level": "verified",
+      "years": 4,
+      "completed_engagements": 2,
+      "avg_rating": 4.7,
+      "day_rate": 1200,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Yuki Vos",
+      "expertise": "Agentic AI Development",
+      "sector": "Data & AI",
+      "level": "proven",
+      "years": 16,
+      "completed_engagements": 7,
+      "avg_rating": 4.9,
+      "day_rate": 1200,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Hassan Tanaka",
+      "expertise": "Agentic AI Development",
+      "sector": "Data & AI",
+      "level": "verified",
+      "years": 7,
+      "completed_engagements": 0,
+      "avg_rating": null,
+      "day_rate": 1200,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Marcus Brahim",
+      "expertise": "Agentic AI Development",
+      "sector": "Data & AI",
+      "level": "verified",
+      "years": 17,
+      "completed_engagements": 1,
+      "avg_rating": 4.5,
+      "day_rate": 1200,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Anya Lewis",
+      "expertise": "LLM / Prompt Engineering",
+      "sector": "Data & AI",
+      "level": "proven",
+      "years": 5,
+      "completed_engagements": 11,
+      "avg_rating": 5.0,
+      "day_rate": 900,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Aisha Haddad",
+      "expertise": "LLM / Prompt Engineering",
+      "sector": "Data & AI",
+      "level": "verified",
+      "years": 13,
+      "completed_engagements": 2,
+      "avg_rating": 4.9,
+      "day_rate": 850,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Felix Reed",
+      "expertise": "LLM / Prompt Engineering",
+      "sector": "Data & AI",
+      "level": "proven",
+      "years": 14,
+      "completed_engagements": 3,
+      "avg_rating": 4.5,
+      "day_rate": 850,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Aisha Carter",
+      "expertise": "MLOps & Model Deployment",
+      "sector": "Data & AI",
+      "level": "verified",
+      "years": 10,
+      "completed_engagements": 0,
+      "avg_rating": null,
+      "day_rate": 900,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Sam Pryce",
+      "expertise": "MLOps & Model Deployment",
+      "sector": "Data & AI",
+      "level": "proven",
+      "years": 9,
+      "completed_engagements": 5,
+      "avg_rating": 4.5,
+      "day_rate": 900,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Hassan Frost",
+      "expertise": "MLOps & Model Deployment",
+      "sector": "Data & AI",
+      "level": "proven",
+      "years": 13,
+      "completed_engagements": 4,
+      "avg_rating": 4.7,
+      "day_rate": 1000,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Erin Vos",
+      "expertise": "AI Governance & Ethics",
+      "sector": "Data & AI",
+      "level": "verified",
+      "years": 8,
+      "completed_engagements": 1,
+      "avg_rating": 5.0,
+      "day_rate": 1050,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Helena Lin",
+      "expertise": "AI Governance & Ethics",
+      "sector": "Data & AI",
+      "level": "verified",
+      "years": 7,
+      "completed_engagements": 0,
+      "avg_rating": null,
+      "day_rate": 900,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Anya Patel",
+      "expertise": "AI Governance & Ethics",
+      "sector": "Data & AI",
+      "level": "proven",
+      "years": 7,
+      "completed_engagements": 4,
+      "avg_rating": 4.9,
+      "day_rate": 1050,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Kai Said",
+      "expertise": "Data Engineering",
+      "sector": "Data & AI",
+      "level": "verified",
+      "years": 11,
+      "completed_engagements": 2,
+      "avg_rating": 4.6,
+      "day_rate": 800,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Sofia Khan",
+      "expertise": "Data Engineering",
+      "sector": "Data & AI",
+      "level": "verified",
+      "years": 12,
+      "completed_engagements": 2,
+      "avg_rating": 4.7,
+      "day_rate": 850,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Yuki Lund",
+      "expertise": "Data Engineering",
+      "sector": "Data & AI",
+      "level": "proven",
+      "years": 7,
+      "completed_engagements": 8,
+      "avg_rating": 5.0,
+      "day_rate": 750,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Idris Owens",
+      "expertise": "Data Governance",
+      "sector": "Data & AI",
+      "level": "declared",
+      "years": 17,
+      "completed_engagements": 0,
+      "avg_rating": null,
+      "day_rate": 750,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "Sofia Pryce",
+      "expertise": "Data Governance",
+      "sector": "Data & AI",
+      "level": "verified",
+      "years": 10,
+      "completed_engagements": 2,
+      "avg_rating": 4.7,
+      "day_rate": 850,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Nathan Ali",
+      "expertise": "Data Governance",
+      "sector": "Data & AI",
+      "level": "proven",
+      "years": 8,
+      "completed_engagements": 11,
+      "avg_rating": 5.0,
+      "day_rate": 750,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Mei Walsh",
+      "expertise": "Analytics Engineering (dbt)",
+      "sector": "Data & AI",
+      "level": "declared",
+      "years": 16,
+      "completed_engagements": 2,
+      "avg_rating": 4.5,
+      "day_rate": 700,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "Marcus Berg",
+      "expertise": "Analytics Engineering (dbt)",
+      "sector": "Data & AI",
+      "level": "verified",
+      "years": 4,
+      "completed_engagements": 1,
+      "avg_rating": 5.0,
+      "day_rate": 700,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Idris Mendez",
+      "expertise": "Fractional AI Officer",
+      "sector": "Data & AI",
+      "level": "verified",
+      "years": 17,
+      "completed_engagements": 0,
+      "avg_rating": null,
+      "day_rate": 1300,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Theo Pryce",
+      "expertise": "Fractional AI Officer",
+      "sector": "Data & AI",
+      "level": "proven",
+      "years": 6,
+      "completed_engagements": 6,
+      "avg_rating": 4.6,
+      "day_rate": 1300,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Nadia Mendez",
+      "expertise": "Fractional AI Officer",
+      "sector": "Data & AI",
+      "level": "proven",
+      "years": 13,
+      "completed_engagements": 3,
+      "avg_rating": 4.5,
+      "day_rate": 1250,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Marcus Frost",
+      "expertise": "Penetration Testing",
+      "sector": "Cyber Security",
+      "level": "verified",
+      "years": 7,
+      "completed_engagements": 1,
+      "avg_rating": 4.3,
+      "day_rate": 1000,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Aisha Brahim",
+      "expertise": "Penetration Testing",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 16,
+      "completed_engagements": 4,
+      "avg_rating": 4.7,
+      "day_rate": 900,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Sofia Lin",
+      "expertise": "Penetration Testing",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 6,
+      "completed_engagements": 11,
+      "avg_rating": 4.5,
+      "day_rate": 1000,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Yuki Reed",
+      "expertise": "Security Architecture",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 15,
+      "completed_engagements": 14,
+      "avg_rating": 4.4,
+      "day_rate": 1000,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Nathan Lin",
+      "expertise": "Security Architecture",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 18,
+      "completed_engagements": 10,
+      "avg_rating": 4.7,
+      "day_rate": 950,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Helena Vos",
+      "expertise": "Security Architecture",
+      "sector": "Cyber Security",
+      "level": "declared",
+      "years": 13,
+      "completed_engagements": 0,
+      "avg_rating": null,
+      "day_rate": 1100,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "Helena Stern",
+      "expertise": "Incident Response & Forensics",
+      "sector": "Cyber Security",
+      "level": "verified",
+      "years": 15,
+      "completed_engagements": 0,
+      "avg_rating": null,
+      "day_rate": 900,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Helena Brahim",
+      "expertise": "Incident Response & Forensics",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 5,
+      "completed_engagements": 8,
+      "avg_rating": 4.7,
+      "day_rate": 950,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Mei Owens",
+      "expertise": "Incident Response & Forensics",
+      "sector": "Cyber Security",
+      "level": "verified",
+      "years": 15,
+      "completed_engagements": 0,
+      "avg_rating": null,
+      "day_rate": 1050,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Felix Owens",
+      "expertise": "Zero Trust Implementation",
+      "sector": "Cyber Security",
+      "level": "verified",
+      "years": 16,
+      "completed_engagements": 1,
+      "avg_rating": 4.6,
+      "day_rate": 900,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Marcus Lin",
+      "expertise": "Zero Trust Implementation",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 10,
+      "completed_engagements": 9,
+      "avg_rating": 4.6,
+      "day_rate": 900,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Mei Pryce",
+      "expertise": "Zero Trust Implementation",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 4,
+      "completed_engagements": 4,
+      "avg_rating": 4.6,
+      "day_rate": 950,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Anya Carter",
+      "expertise": "Cloud Security (CSPM)",
+      "sector": "Cyber Security",
+      "level": "verified",
+      "years": 7,
+      "completed_engagements": 0,
+      "avg_rating": null,
+      "day_rate": 1000,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Sam Marino",
+      "expertise": "Cloud Security (CSPM)",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 11,
+      "completed_engagements": 7,
+      "avg_rating": 4.5,
+      "day_rate": 850,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Sam Petrova",
+      "expertise": "Cloud Security (CSPM)",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 5,
+      "completed_engagements": 11,
+      "avg_rating": 4.3,
+      "day_rate": 1000,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Theo Nair",
+      "expertise": "AI Security / Red Teaming",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 6,
+      "completed_engagements": 6,
+      "avg_rating": 4.6,
+      "day_rate": 1150,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Tom Carter",
+      "expertise": "AI Security / Red Teaming",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 6,
+      "completed_engagements": 3,
+      "avg_rating": 4.6,
+      "day_rate": 1150,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Omar Frost",
+      "expertise": "AI Security / Red Teaming",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 8,
+      "completed_engagements": 10,
+      "avg_rating": 4.6,
+      "day_rate": 1200,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Mei Said",
+      "expertise": "SOC2 Readiness",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 8,
+      "completed_engagements": 6,
+      "avg_rating": 4.5,
+      "day_rate": 700,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Felix Walsh",
+      "expertise": "SOC2 Readiness",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 9,
+      "completed_engagements": 14,
+      "avg_rating": 4.3,
+      "day_rate": 850,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Grace Bello",
+      "expertise": "SOC2 Readiness",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 6,
+      "completed_engagements": 11,
+      "avg_rating": 4.3,
+      "day_rate": 850,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Aisha Carter",
+      "expertise": "ISO27001 Implementation",
+      "sector": "Cyber Security",
+      "level": "verified",
+      "years": 5,
+      "completed_engagements": 2,
+      "avg_rating": 4.8,
+      "day_rate": 750,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Nathan Allen",
+      "expertise": "ISO27001 Implementation",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 7,
+      "completed_engagements": 12,
+      "avg_rating": 4.7,
+      "day_rate": 700,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Zara Brahim",
+      "expertise": "ISO27001 Implementation",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 13,
+      "completed_engagements": 12,
+      "avg_rating": 4.7,
+      "day_rate": 750,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Tom Lin",
+      "expertise": "Fractional CISO",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 8,
+      "completed_engagements": 6,
+      "avg_rating": 4.6,
+      "day_rate": 1200,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Sam Patel",
+      "expertise": "Fractional CISO",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 4,
+      "completed_engagements": 4,
+      "avg_rating": 4.6,
+      "day_rate": 1300,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Marcus Brahim",
+      "expertise": "Fractional CISO",
+      "sector": "Cyber Security",
+      "level": "proven",
+      "years": 8,
+      "completed_engagements": 11,
+      "avg_rating": 4.4,
+      "day_rate": 1200,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Kai Brahim",
+      "expertise": "Cloud Architecture (AWS)",
+      "sector": "Technology",
+      "level": "proven",
+      "years": 8,
+      "completed_engagements": 8,
+      "avg_rating": 4.4,
+      "day_rate": 950,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Hassan Berg",
+      "expertise": "Cloud Architecture (AWS)",
+      "sector": "Technology",
+      "level": "proven",
+      "years": 12,
+      "completed_engagements": 13,
+      "avg_rating": 4.3,
+      "day_rate": 950,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Lena Frost",
+      "expertise": "Cloud Architecture (AWS)",
+      "sector": "Technology",
+      "level": "proven",
+      "years": 8,
+      "completed_engagements": 5,
+      "avg_rating": 4.4,
+      "day_rate": 800,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Erin Haddad",
+      "expertise": "Azure Architecture",
+      "sector": "Technology",
+      "level": "declared",
+      "years": 13,
+      "completed_engagements": 1,
+      "avg_rating": 4.4,
+      "day_rate": 800,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "Tom Lin",
+      "expertise": "Azure Architecture",
+      "sector": "Technology",
+      "level": "proven",
+      "years": 12,
+      "completed_engagements": 7,
+      "avg_rating": 4.6,
+      "day_rate": 750,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Aisha Pryce",
+      "expertise": "Kubernetes / Platform Engineering",
+      "sector": "Technology",
+      "level": "proven",
+      "years": 4,
+      "completed_engagements": 7,
+      "avg_rating": 4.3,
+      "day_rate": 900,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Owen Khan",
+      "expertise": "Kubernetes / Platform Engineering",
+      "sector": "Technology",
+      "level": "verified",
+      "years": 12,
+      "completed_engagements": 1,
+      "avg_rating": 4.8,
+      "day_rate": 1000,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Priya Allen",
+      "expertise": "Kubernetes / Platform Engineering",
+      "sector": "Technology",
+      "level": "declared",
+      "years": 18,
+      "completed_engagements": 2,
+      "avg_rating": 4.4,
+      "day_rate": 850,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "Theo Dubois",
+      "expertise": "Site Reliability Engineering",
+      "sector": "Technology",
+      "level": "proven",
+      "years": 10,
+      "completed_engagements": 5,
+      "avg_rating": 4.4,
+      "day_rate": 850,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Chloe Lund",
+      "expertise": "Site Reliability Engineering",
+      "sector": "Technology",
+      "level": "proven",
+      "years": 18,
+      "completed_engagements": 3,
+      "avg_rating": 4.6,
+      "day_rate": 850,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Mei Allen",
+      "expertise": "Terraform / IaC",
+      "sector": "Technology",
+      "level": "verified",
+      "years": 18,
+      "completed_engagements": 2,
+      "avg_rating": 4.9,
+      "day_rate": 900,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Erin Marino",
+      "expertise": "Terraform / IaC",
+      "sector": "Technology",
+      "level": "proven",
+      "years": 17,
+      "completed_engagements": 6,
+      "avg_rating": 4.4,
+      "day_rate": 800,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Kai Tanaka",
+      "expertise": "Stripe Connect Implementation",
+      "sector": "Technology",
+      "level": "declared",
+      "years": 18,
+      "completed_engagements": 2,
+      "avg_rating": 4.5,
+      "day_rate": 800,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "Anya Lin",
+      "expertise": "Stripe Connect Implementation",
+      "sector": "Technology",
+      "level": "proven",
+      "years": 8,
+      "completed_engagements": 6,
+      "avg_rating": 4.4,
+      "day_rate": 700,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Nathan Carter",
+      "expertise": "Microsoft 365 Migration",
+      "sector": "Technology",
+      "level": "declared",
+      "years": 7,
+      "completed_engagements": 1,
+      "avg_rating": 4.4,
+      "day_rate": 650,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "Chloe Berg",
+      "expertise": "Microsoft 365 Migration",
+      "sector": "Technology",
+      "level": "proven",
+      "years": 7,
+      "completed_engagements": 6,
+      "avg_rating": 4.3,
+      "day_rate": 600,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Nathan Patel",
+      "expertise": "Fractional CTO",
+      "sector": "Technology",
+      "level": "verified",
+      "years": 16,
+      "completed_engagements": 0,
+      "avg_rating": null,
+      "day_rate": 1100,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Chloe Pryce",
+      "expertise": "Fractional CTO",
+      "sector": "Technology",
+      "level": "proven",
+      "years": 17,
+      "completed_engagements": 13,
+      "avg_rating": 4.7,
+      "day_rate": 1050,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Marcus Lund",
+      "expertise": "Fractional CTO",
+      "sector": "Technology",
+      "level": "proven",
+      "years": 13,
+      "completed_engagements": 5,
+      "avg_rating": 5.0,
+      "day_rate": 1100,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "David Allen",
+      "expertise": "AML Review",
+      "sector": "Finance",
+      "level": "proven",
+      "years": 15,
+      "completed_engagements": 8,
+      "avg_rating": 4.9,
+      "day_rate": 700,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Zara Bello",
+      "expertise": "AML Review",
+      "sector": "Finance",
+      "level": "verified",
+      "years": 7,
+      "completed_engagements": 2,
+      "avg_rating": 4.5,
+      "day_rate": 700,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Priya Bello",
+      "expertise": "AML Review",
+      "sector": "Finance",
+      "level": "proven",
+      "years": 14,
+      "completed_engagements": 11,
+      "avg_rating": 4.8,
+      "day_rate": 650,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Chloe Tanaka",
+      "expertise": "KYC Review",
+      "sector": "Finance",
+      "level": "declared",
+      "years": 18,
+      "completed_engagements": 2,
+      "avg_rating": 4.5,
+      "day_rate": 600,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "Mei Carter",
+      "expertise": "KYC Review",
+      "sector": "Finance",
+      "level": "verified",
+      "years": 12,
+      "completed_engagements": 1,
+      "avg_rating": 4.5,
+      "day_rate": 650,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Raj Cole",
+      "expertise": "KYC Review",
+      "sector": "Finance",
+      "level": "proven",
+      "years": 6,
+      "completed_engagements": 11,
+      "avg_rating": 4.4,
+      "day_rate": 650,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Mei Walsh",
+      "expertise": "Trust Administration",
+      "sector": "Finance",
+      "level": "proven",
+      "years": 13,
+      "completed_engagements": 12,
+      "avg_rating": 4.5,
+      "day_rate": 750,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Theo Nair",
+      "expertise": "Trust Administration",
+      "sector": "Finance",
+      "level": "verified",
+      "years": 10,
+      "completed_engagements": 0,
+      "avg_rating": null,
+      "day_rate": 750,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Zara Pryce",
+      "expertise": "Fund Administration",
+      "sector": "Finance",
+      "level": "verified",
+      "years": 11,
+      "completed_engagements": 1,
+      "avg_rating": 4.8,
+      "day_rate": 780,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Grace Petrova",
+      "expertise": "Fund Administration",
+      "sector": "Finance",
+      "level": "proven",
+      "years": 6,
+      "completed_engagements": 14,
+      "avg_rating": 4.8,
+      "day_rate": 680,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Idris Lin",
+      "expertise": "Regulatory Reporting",
+      "sector": "Finance",
+      "level": "proven",
+      "years": 5,
+      "completed_engagements": 8,
+      "avg_rating": 4.9,
+      "day_rate": 700,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Mei Berg",
+      "expertise": "Regulatory Reporting",
+      "sector": "Finance",
+      "level": "declared",
+      "years": 6,
+      "completed_engagements": 0,
+      "avg_rating": null,
+      "day_rate": 650,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "David Vos",
+      "expertise": "Financial Modelling",
+      "sector": "Finance",
+      "level": "proven",
+      "years": 17,
+      "completed_engagements": 12,
+      "avg_rating": 4.8,
+      "day_rate": 800,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Yuki Lund",
+      "expertise": "Financial Modelling",
+      "sector": "Finance",
+      "level": "proven",
+      "years": 15,
+      "completed_engagements": 6,
+      "avg_rating": 4.8,
+      "day_rate": 800,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Nathan Vos",
+      "expertise": "Fractional CFO",
+      "sector": "Leadership",
+      "level": "verified",
+      "years": 4,
+      "completed_engagements": 2,
+      "avg_rating": 4.9,
+      "day_rate": 1050,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Lucas Tanaka",
+      "expertise": "Fractional CFO",
+      "sector": "Leadership",
+      "level": "verified",
+      "years": 12,
+      "completed_engagements": 2,
+      "avg_rating": 4.6,
+      "day_rate": 1200,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Helena Frost",
+      "expertise": "Fractional CFO",
+      "sector": "Leadership",
+      "level": "proven",
+      "years": 6,
+      "completed_engagements": 10,
+      "avg_rating": 4.9,
+      "day_rate": 1200,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Nadia Ali",
+      "expertise": "Fractional Financial Controller",
+      "sector": "Finance",
+      "level": "verified",
+      "years": 13,
+      "completed_engagements": 1,
+      "avg_rating": 4.9,
+      "day_rate": 950,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Yuki Ross",
+      "expertise": "Fractional Financial Controller",
+      "sector": "Finance",
+      "level": "proven",
+      "years": 18,
+      "completed_engagements": 10,
+      "avg_rating": 4.4,
+      "day_rate": 900,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Sam Khan",
+      "expertise": "Enterprise Risk Management",
+      "sector": "Risk",
+      "level": "proven",
+      "years": 8,
+      "completed_engagements": 13,
+      "avg_rating": 4.8,
+      "day_rate": 950,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Grace Pryce",
+      "expertise": "Enterprise Risk Management",
+      "sector": "Risk",
+      "level": "declared",
+      "years": 5,
+      "completed_engagements": 1,
+      "avg_rating": 4.8,
+      "day_rate": 850,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "Omar Patel",
+      "expertise": "Operational Resilience (DORA)",
+      "sector": "Risk",
+      "level": "verified",
+      "years": 5,
+      "completed_engagements": 2,
+      "avg_rating": 4.4,
+      "day_rate": 900,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Nathan Said",
+      "expertise": "Operational Resilience (DORA)",
+      "sector": "Risk",
+      "level": "verified",
+      "years": 5,
+      "completed_engagements": 0,
+      "avg_rating": null,
+      "day_rate": 950,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Yuki Patel",
+      "expertise": "Operational Resilience (DORA)",
+      "sector": "Risk",
+      "level": "proven",
+      "years": 4,
+      "completed_engagements": 9,
+      "avg_rating": 4.4,
+      "day_rate": 950,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Nathan Lund",
+      "expertise": "Internal Audit",
+      "sector": "Risk",
+      "level": "proven",
+      "years": 4,
+      "completed_engagements": 14,
+      "avg_rating": 4.9,
+      "day_rate": 800,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Nathan Owens",
+      "expertise": "Internal Audit",
+      "sector": "Risk",
+      "level": "declared",
+      "years": 8,
+      "completed_engagements": 1,
+      "avg_rating": 4.8,
+      "day_rate": 750,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "Nadia Walsh",
+      "expertise": "Data Protection / GDPR",
+      "sector": "Legal",
+      "level": "proven",
+      "years": 18,
+      "completed_engagements": 12,
+      "avg_rating": 4.5,
+      "day_rate": 800,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Omar Tanaka",
+      "expertise": "Data Protection / GDPR",
+      "sector": "Legal",
+      "level": "proven",
+      "years": 9,
+      "completed_engagements": 9,
+      "avg_rating": 4.8,
+      "day_rate": 850,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Erin Santos",
+      "expertise": "Data Protection / GDPR",
+      "sector": "Legal",
+      "level": "proven",
+      "years": 13,
+      "completed_engagements": 5,
+      "avg_rating": 4.7,
+      "day_rate": 850,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Felix Stern",
+      "expertise": "Commercial Contracts",
+      "sector": "Legal",
+      "level": "proven",
+      "years": 14,
+      "completed_engagements": 4,
+      "avg_rating": 4.6,
+      "day_rate": 800,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Maria Lewis",
+      "expertise": "Commercial Contracts",
+      "sector": "Legal",
+      "level": "verified",
+      "years": 7,
+      "completed_engagements": 1,
+      "avg_rating": 4.6,
+      "day_rate": 750,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Lucas Lund",
+      "expertise": "M&A Legal Support",
+      "sector": "Legal",
+      "level": "verified",
+      "years": 8,
+      "completed_engagements": 1,
+      "avg_rating": 4.9,
+      "day_rate": 1050,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Priya Walsh",
+      "expertise": "M&A Legal Support",
+      "sector": "Legal",
+      "level": "verified",
+      "years": 7,
+      "completed_engagements": 1,
+      "avg_rating": 4.8,
+      "day_rate": 950,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Lucas Nair",
+      "expertise": "Meta Ads Lead Generation",
+      "sector": "Marketing",
+      "level": "proven",
+      "years": 17,
+      "completed_engagements": 6,
+      "avg_rating": 4.3,
+      "day_rate": 520,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Helena Marino",
+      "expertise": "Meta Ads Lead Generation",
+      "sector": "Marketing",
+      "level": "verified",
+      "years": 13,
+      "completed_engagements": 0,
+      "avg_rating": null,
+      "day_rate": 520,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Sam Said",
+      "expertise": "Google Ads / PPC",
+      "sector": "Marketing",
+      "level": "verified",
+      "years": 6,
+      "completed_engagements": 1,
+      "avg_rating": 4.7,
+      "day_rate": 470,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Lucas Ross",
+      "expertise": "Google Ads / PPC",
+      "sector": "Marketing",
+      "level": "declared",
+      "years": 5,
+      "completed_engagements": 1,
+      "avg_rating": 4.7,
+      "day_rate": 520,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "Felix Lin",
+      "expertise": "SEO Strategy",
+      "sector": "Marketing",
+      "level": "proven",
+      "years": 10,
+      "completed_engagements": 9,
+      "avg_rating": 5.0,
+      "day_rate": 500,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Aisha Stern",
+      "expertise": "HubSpot / Lifecycle Automation",
+      "sector": "Marketing",
+      "level": "proven",
+      "years": 7,
+      "completed_engagements": 13,
+      "avg_rating": 4.4,
+      "day_rate": 560,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Ruth Lin",
+      "expertise": "HubSpot / Lifecycle Automation",
+      "sector": "Marketing",
+      "level": "proven",
+      "years": 16,
+      "completed_engagements": 4,
+      "avg_rating": 5.0,
+      "day_rate": 510,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Chloe Haddad",
+      "expertise": "Fractional CMO",
+      "sector": "Marketing",
+      "level": "proven",
+      "years": 5,
+      "completed_engagements": 8,
+      "avg_rating": 4.7,
+      "day_rate": 950,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Priya Carter",
+      "expertise": "Fractional CMO",
+      "sector": "Marketing",
+      "level": "proven",
+      "years": 5,
+      "completed_engagements": 10,
+      "avg_rating": 4.6,
+      "day_rate": 950,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Owen Lund",
+      "expertise": "Fractional CMO",
+      "sector": "Marketing",
+      "level": "proven",
+      "years": 6,
+      "completed_engagements": 14,
+      "avg_rating": 4.6,
+      "day_rate": 1050,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Owen Khan",
+      "expertise": "Business Transformation",
+      "sector": "Operations",
+      "level": "proven",
+      "years": 16,
+      "completed_engagements": 11,
+      "avg_rating": 4.6,
+      "day_rate": 950,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Theo Walsh",
+      "expertise": "Business Transformation",
+      "sector": "Operations",
+      "level": "proven",
+      "years": 17,
+      "completed_engagements": 8,
+      "avg_rating": 4.5,
+      "day_rate": 850,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Omar Lund",
+      "expertise": "Change Management",
+      "sector": "Operations",
+      "level": "verified",
+      "years": 13,
+      "completed_engagements": 1,
+      "avg_rating": 4.7,
+      "day_rate": 800,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Raj Nair",
+      "expertise": "Change Management",
+      "sector": "Operations",
+      "level": "verified",
+      "years": 6,
+      "completed_engagements": 1,
+      "avg_rating": 4.6,
+      "day_rate": 750,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Anya Khan",
+      "expertise": "Supply Chain Optimisation",
+      "sector": "Operations",
+      "level": "verified",
+      "years": 15,
+      "completed_engagements": 2,
+      "avg_rating": 4.9,
+      "day_rate": 900,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Priya Bello",
+      "expertise": "Supply Chain Optimisation",
+      "sector": "Operations",
+      "level": "proven",
+      "years": 7,
+      "completed_engagements": 4,
+      "avg_rating": 4.8,
+      "day_rate": 850,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Nadia Mendez",
+      "expertise": "Supply Chain Optimisation",
+      "sector": "Operations",
+      "level": "verified",
+      "years": 14,
+      "completed_engagements": 1,
+      "avg_rating": 4.8,
+      "day_rate": 850,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Anya Nair",
+      "expertise": "Fractional COO",
+      "sector": "Leadership",
+      "level": "declared",
+      "years": 10,
+      "completed_engagements": 0,
+      "avg_rating": null,
+      "day_rate": 1050,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "Lena Lin",
+      "expertise": "Fractional COO",
+      "sector": "Leadership",
+      "level": "proven",
+      "years": 12,
+      "completed_engagements": 10,
+      "avg_rating": 4.7,
+      "day_rate": 1100,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Erin Haddad",
+      "expertise": "Fractional COO",
+      "sector": "Leadership",
+      "level": "verified",
+      "years": 11,
+      "completed_engagements": 2,
+      "avg_rating": 4.5,
+      "day_rate": 1050,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Helena Allen",
+      "expertise": "PMO / Programme Management",
+      "sector": "Operations",
+      "level": "proven",
+      "years": 5,
+      "completed_engagements": 8,
+      "avg_rating": 4.8,
+      "day_rate": 700,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Tom Reed",
+      "expertise": "PMO / Programme Management",
+      "sector": "Operations",
+      "level": "proven",
+      "years": 15,
+      "completed_engagements": 7,
+      "avg_rating": 4.7,
+      "day_rate": 800,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Zara Berg",
+      "expertise": "Renewable Energy Project Management",
+      "sector": "Energy",
+      "level": "proven",
+      "years": 8,
+      "completed_engagements": 6,
+      "avg_rating": 4.5,
+      "day_rate": 800,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Lena Nair",
+      "expertise": "Renewable Energy Project Management",
+      "sector": "Energy",
+      "level": "proven",
+      "years": 8,
+      "completed_engagements": 5,
+      "avg_rating": 4.3,
+      "day_rate": 750,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Nadia Berg",
+      "expertise": "Renewable Energy Project Management",
+      "sector": "Energy",
+      "level": "proven",
+      "years": 14,
+      "completed_engagements": 5,
+      "avg_rating": 4.9,
+      "day_rate": 850,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Marcus Carter",
+      "expertise": "Carbon Accounting & ESG Reporting",
+      "sector": "Energy",
+      "level": "declared",
+      "years": 11,
+      "completed_engagements": 1,
+      "avg_rating": 4.6,
+      "day_rate": 750,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "Maria Lewis",
+      "expertise": "Carbon Accounting & ESG Reporting",
+      "sector": "Energy",
+      "level": "verified",
+      "years": 5,
+      "completed_engagements": 1,
+      "avg_rating": 4.9,
+      "day_rate": 800,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Grace Brahim",
+      "expertise": "Carbon Accounting & ESG Reporting",
+      "sector": "Energy",
+      "level": "proven",
+      "years": 4,
+      "completed_engagements": 13,
+      "avg_rating": 4.4,
+      "day_rate": 850,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Lena Brahim",
+      "expertise": "Grid Integration",
+      "sector": "Energy",
+      "level": "proven",
+      "years": 12,
+      "completed_engagements": 4,
+      "avg_rating": 4.8,
+      "day_rate": 950,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Zara Petrova",
+      "expertise": "Grid Integration",
+      "sector": "Energy",
+      "level": "proven",
+      "years": 10,
+      "completed_engagements": 11,
+      "avg_rating": 4.6,
+      "day_rate": 900,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Lena Carter",
+      "expertise": "HSE / Health & Safety Management",
+      "sector": "Construction",
+      "level": "proven",
+      "years": 8,
+      "completed_engagements": 9,
+      "avg_rating": 4.7,
+      "day_rate": 600,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Zara Walsh",
+      "expertise": "HSE / Health & Safety Management",
+      "sector": "Construction",
+      "level": "declared",
+      "years": 14,
+      "completed_engagements": 0,
+      "avg_rating": null,
+      "day_rate": 650,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "Omar Lin",
+      "expertise": "HSE / Health & Safety Management",
+      "sector": "Construction",
+      "level": "declared",
+      "years": 6,
+      "completed_engagements": 0,
+      "avg_rating": null,
+      "day_rate": 750,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "Aisha Santos",
+      "expertise": "Quantity Surveying",
+      "sector": "Construction",
+      "level": "declared",
+      "years": 15,
+      "completed_engagements": 1,
+      "avg_rating": 4.7,
+      "day_rate": 700,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "David Vos",
+      "expertise": "Quantity Surveying",
+      "sector": "Construction",
+      "level": "verified",
+      "years": 15,
+      "completed_engagements": 1,
+      "avg_rating": 4.9,
+      "day_rate": 650,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Mei Vos",
+      "expertise": "BIM Coordination",
+      "sector": "Construction",
+      "level": "proven",
+      "years": 13,
+      "completed_engagements": 13,
+      "avg_rating": 4.8,
+      "day_rate": 650,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Yuki Allen",
+      "expertise": "BIM Coordination",
+      "sector": "Construction",
+      "level": "verified",
+      "years": 6,
+      "completed_engagements": 2,
+      "avg_rating": 4.9,
+      "day_rate": 650,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Aisha Lewis",
+      "expertise": "Clinical Governance",
+      "sector": "Healthcare",
+      "level": "verified",
+      "years": 13,
+      "completed_engagements": 1,
+      "avg_rating": 4.8,
+      "day_rate": 850,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Bea Berg",
+      "expertise": "Clinical Governance",
+      "sector": "Healthcare",
+      "level": "proven",
+      "years": 15,
+      "completed_engagements": 10,
+      "avg_rating": 4.5,
+      "day_rate": 800,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Omar Bello",
+      "expertise": "Clinical Governance",
+      "sector": "Healthcare",
+      "level": "proven",
+      "years": 5,
+      "completed_engagements": 10,
+      "avg_rating": 4.7,
+      "day_rate": 800,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Erin Patel",
+      "expertise": "Medical Device Regulation",
+      "sector": "Healthcare",
+      "level": "proven",
+      "years": 5,
+      "completed_engagements": 3,
+      "avg_rating": 4.5,
+      "day_rate": 950,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Felix Nair",
+      "expertise": "Medical Device Regulation",
+      "sector": "Healthcare",
+      "level": "proven",
+      "years": 17,
+      "completed_engagements": 13,
+      "avg_rating": 4.5,
+      "day_rate": 800,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Lucas Mendez",
+      "expertise": "Medical Device Regulation",
+      "sector": "Healthcare",
+      "level": "verified",
+      "years": 14,
+      "completed_engagements": 2,
+      "avg_rating": 4.6,
+      "day_rate": 850,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Maria Stern",
+      "expertise": "Health Informatics",
+      "sector": "Healthcare",
+      "level": "verified",
+      "years": 5,
+      "completed_engagements": 1,
+      "avg_rating": 4.6,
+      "day_rate": 850,
+      "evidence": [
+        "certification",
+        "portfolio"
+      ]
+    },
+    {
+      "expert": "Raj Patel",
+      "expertise": "Health Informatics",
+      "sector": "Healthcare",
+      "level": "proven",
+      "years": 9,
+      "completed_engagements": 5,
+      "avg_rating": 4.6,
+      "day_rate": 850,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Lena Lin",
+      "expertise": "Lean Manufacturing / Six Sigma",
+      "sector": "Manufacturing",
+      "level": "proven",
+      "years": 4,
+      "completed_engagements": 11,
+      "avg_rating": 4.6,
+      "day_rate": 700,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Omar Patel",
+      "expertise": "Lean Manufacturing / Six Sigma",
+      "sector": "Manufacturing",
+      "level": "declared",
+      "years": 17,
+      "completed_engagements": 1,
+      "avg_rating": 4.7,
+      "day_rate": 650,
+      "evidence": [
+        "self-declared"
+      ]
+    },
+    {
+      "expert": "Mei Carter",
+      "expertise": "Industrial Automation",
+      "sector": "Manufacturing",
+      "level": "proven",
+      "years": 4,
+      "completed_engagements": 9,
+      "avg_rating": 4.4,
+      "day_rate": 800,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Zara Mendez",
+      "expertise": "Industrial Automation",
+      "sector": "Manufacturing",
+      "level": "proven",
+      "years": 16,
+      "completed_engagements": 10,
+      "avg_rating": 4.3,
+      "day_rate": 800,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Nadia Marino",
+      "expertise": "Industrial Automation",
+      "sector": "Manufacturing",
+      "level": "proven",
+      "years": 18,
+      "completed_engagements": 10,
+      "avg_rating": 4.8,
+      "day_rate": 750,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Priya Pryce",
+      "expertise": "Defence Procurement",
+      "sector": "Defence",
+      "level": "proven",
+      "years": 15,
+      "completed_engagements": 6,
+      "avg_rating": 4.4,
+      "day_rate": 1000,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Priya Haddad",
+      "expertise": "Defence Procurement",
+      "sector": "Defence",
+      "level": "proven",
+      "years": 17,
+      "completed_engagements": 6,
+      "avg_rating": 4.9,
+      "day_rate": 950,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    },
+    {
+      "expert": "Marcus Pryce",
+      "expertise": "Defence Procurement",
+      "sector": "Defence",
+      "level": "proven",
+      "years": 18,
+      "completed_engagements": 10,
+      "avg_rating": 4.8,
+      "day_rate": 1000,
+      "evidence": [
+        "completed engagement",
+        "review"
+      ]
+    }
+  ],
+  "summary": {
+    "total": 158,
+    "proven": 93,
+    "verified": 46,
+    "declared": 19
+  }
+}

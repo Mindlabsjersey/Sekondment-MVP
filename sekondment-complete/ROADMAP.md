@@ -1,3 +1,5 @@
+> **For current build inventory, see CURRENT_STATE.md** (this file may contain older counts; strategy/detail here is still useful).
+
 # Sekondment — Build Roadmap & Outstanding Work
 
 This file tracks the strategic direction (Prompt 1) and the stabilise/harden plan

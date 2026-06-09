@@ -1,3 +1,5 @@
+> **Start with CURRENT_STATE.md** — the accurate, up-to-date build inventory and direction.
+
 # START HERE — Joe's plain-English guide
 
 This is for YOU (not the AI). It walks the whole flow: open in VS Code → get it

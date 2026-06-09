@@ -1,0 +1,513 @@
+{
+  "research_summary": {
+    "sources_date": "2026",
+    "key_findings": [
+      "Fractional/interim work up 57% since 2020; concentrated in tech/SaaS, healthcare, finance, manufacturing.",
+      "Highest freelance rates 2026: ML/AI engineering, cybersecurity consulting, cloud/DevOps, data science.",
+      "Cybersecurity skills shortage exceeds 4M globally; 95% of teams report a critical skills gap.",
+      "Emerging fractional roles: Fractional AI Officer, Digital Transformation Lead, Data Governance Expert.",
+      "Future-proof = high specialisation + technical complexity + regulatory/strategic importance.",
+      "Growth sectors for 2026: healthcare, defence, cybersecurity, supply chain, energy.",
+      "Compliance-heavy industries (construction, energy, manufacturing) pay premium for HSE & regulatory specialists.",
+      "Specialists earn 2-4x generalists."
+    ]
+  },
+  "expertise": [
+    {
+      "name": "Machine Learning Engineering",
+      "sector": "Data & AI",
+      "day": 1100,
+      "demand": 5,
+      "ai_resistance": 3,
+      "lead": false
+    },
+    {
+      "name": "Agentic AI Development",
+      "sector": "Data & AI",
+      "day": 1200,
+      "demand": 5,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "LLM / Prompt Engineering",
+      "sector": "Data & AI",
+      "day": 850,
+      "demand": 5,
+      "ai_resistance": 2,
+      "lead": false
+    },
+    {
+      "name": "MLOps & Model Deployment",
+      "sector": "Data & AI",
+      "day": 900,
+      "demand": 5,
+      "ai_resistance": 3,
+      "lead": false
+    },
+    {
+      "name": "AI Governance & Ethics",
+      "sector": "Data & AI",
+      "day": 950,
+      "demand": 5,
+      "ai_resistance": 5,
+      "lead": false
+    },
+    {
+      "name": "Data Engineering",
+      "sector": "Data & AI",
+      "day": 750,
+      "demand": 5,
+      "ai_resistance": 3,
+      "lead": false
+    },
+    {
+      "name": "Data Governance",
+      "sector": "Data & AI",
+      "day": 800,
+      "demand": 5,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Analytics Engineering (dbt)",
+      "sector": "Data & AI",
+      "day": 700,
+      "demand": 4,
+      "ai_resistance": 3,
+      "lead": false
+    },
+    {
+      "name": "Fractional AI Officer",
+      "sector": "Data & AI",
+      "day": 1300,
+      "demand": 5,
+      "ai_resistance": 5,
+      "lead": true
+    },
+    {
+      "name": "Penetration Testing",
+      "sector": "Cyber Security",
+      "day": 900,
+      "demand": 5,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Security Architecture",
+      "sector": "Cyber Security",
+      "day": 1000,
+      "demand": 5,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Incident Response & Forensics",
+      "sector": "Cyber Security",
+      "day": 950,
+      "demand": 5,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Zero Trust Implementation",
+      "sector": "Cyber Security",
+      "day": 950,
+      "demand": 5,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Cloud Security (CSPM)",
+      "sector": "Cyber Security",
+      "day": 900,
+      "demand": 5,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "AI Security / Red Teaming",
+      "sector": "Cyber Security",
+      "day": 1100,
+      "demand": 5,
+      "ai_resistance": 5,
+      "lead": false
+    },
+    {
+      "name": "SOC2 Readiness",
+      "sector": "Cyber Security",
+      "day": 750,
+      "demand": 5,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "ISO27001 Implementation",
+      "sector": "Cyber Security",
+      "day": 750,
+      "demand": 5,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Fractional CISO",
+      "sector": "Cyber Security",
+      "day": 1200,
+      "demand": 5,
+      "ai_resistance": 5,
+      "lead": true
+    },
+    {
+      "name": "Cloud Architecture (AWS)",
+      "sector": "Technology",
+      "day": 850,
+      "demand": 5,
+      "ai_resistance": 3,
+      "lead": false
+    },
+    {
+      "name": "Azure Architecture",
+      "sector": "Technology",
+      "day": 800,
+      "demand": 4,
+      "ai_resistance": 3,
+      "lead": false
+    },
+    {
+      "name": "Kubernetes / Platform Engineering",
+      "sector": "Technology",
+      "day": 900,
+      "demand": 5,
+      "ai_resistance": 3,
+      "lead": false
+    },
+    {
+      "name": "Site Reliability Engineering",
+      "sector": "Technology",
+      "day": 850,
+      "demand": 4,
+      "ai_resistance": 3,
+      "lead": false
+    },
+    {
+      "name": "Terraform / IaC",
+      "sector": "Technology",
+      "day": 800,
+      "demand": 4,
+      "ai_resistance": 3,
+      "lead": false
+    },
+    {
+      "name": "Stripe Connect Implementation",
+      "sector": "Technology",
+      "day": 750,
+      "demand": 4,
+      "ai_resistance": 3,
+      "lead": false
+    },
+    {
+      "name": "Microsoft 365 Migration",
+      "sector": "Technology",
+      "day": 600,
+      "demand": 4,
+      "ai_resistance": 2,
+      "lead": false
+    },
+    {
+      "name": "Fractional CTO",
+      "sector": "Technology",
+      "day": 1100,
+      "demand": 5,
+      "ai_resistance": 5,
+      "lead": true
+    },
+    {
+      "name": "AML Review",
+      "sector": "Finance",
+      "day": 650,
+      "demand": 5,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "KYC Review",
+      "sector": "Finance",
+      "day": 600,
+      "demand": 5,
+      "ai_resistance": 3,
+      "lead": false
+    },
+    {
+      "name": "Trust Administration",
+      "sector": "Finance",
+      "day": 650,
+      "demand": 4,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Fund Administration",
+      "sector": "Finance",
+      "day": 680,
+      "demand": 4,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Regulatory Reporting",
+      "sector": "Finance",
+      "day": 700,
+      "demand": 4,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Financial Modelling",
+      "sector": "Finance",
+      "day": 750,
+      "demand": 4,
+      "ai_resistance": 3,
+      "lead": false
+    },
+    {
+      "name": "Fractional CFO",
+      "sector": "Leadership",
+      "day": 1100,
+      "demand": 5,
+      "ai_resistance": 5,
+      "lead": true
+    },
+    {
+      "name": "Fractional Financial Controller",
+      "sector": "Finance",
+      "day": 850,
+      "demand": 4,
+      "ai_resistance": 4,
+      "lead": true
+    },
+    {
+      "name": "Enterprise Risk Management",
+      "sector": "Risk",
+      "day": 850,
+      "demand": 4,
+      "ai_resistance": 5,
+      "lead": false
+    },
+    {
+      "name": "Operational Resilience (DORA)",
+      "sector": "Risk",
+      "day": 900,
+      "demand": 5,
+      "ai_resistance": 5,
+      "lead": false
+    },
+    {
+      "name": "Internal Audit",
+      "sector": "Risk",
+      "day": 700,
+      "demand": 4,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Data Protection / GDPR",
+      "sector": "Legal",
+      "day": 800,
+      "demand": 5,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Commercial Contracts",
+      "sector": "Legal",
+      "day": 750,
+      "demand": 4,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "M&A Legal Support",
+      "sector": "Legal",
+      "day": 1000,
+      "demand": 4,
+      "ai_resistance": 5,
+      "lead": false
+    },
+    {
+      "name": "Meta Ads Lead Generation",
+      "sector": "Marketing",
+      "day": 520,
+      "demand": 4,
+      "ai_resistance": 2,
+      "lead": false
+    },
+    {
+      "name": "Google Ads / PPC",
+      "sector": "Marketing",
+      "day": 520,
+      "demand": 4,
+      "ai_resistance": 2,
+      "lead": false
+    },
+    {
+      "name": "SEO Strategy",
+      "sector": "Marketing",
+      "day": 500,
+      "demand": 3,
+      "ai_resistance": 2,
+      "lead": false
+    },
+    {
+      "name": "HubSpot / Lifecycle Automation",
+      "sector": "Marketing",
+      "day": 560,
+      "demand": 4,
+      "ai_resistance": 2,
+      "lead": false
+    },
+    {
+      "name": "Fractional CMO",
+      "sector": "Marketing",
+      "day": 950,
+      "demand": 5,
+      "ai_resistance": 4,
+      "lead": true
+    },
+    {
+      "name": "Business Transformation",
+      "sector": "Operations",
+      "day": 900,
+      "demand": 4,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Change Management",
+      "sector": "Operations",
+      "day": 750,
+      "demand": 4,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Supply Chain Optimisation",
+      "sector": "Operations",
+      "day": 800,
+      "demand": 5,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Fractional COO",
+      "sector": "Leadership",
+      "day": 1050,
+      "demand": 5,
+      "ai_resistance": 5,
+      "lead": true
+    },
+    {
+      "name": "PMO / Programme Management",
+      "sector": "Operations",
+      "day": 700,
+      "demand": 4,
+      "ai_resistance": 3,
+      "lead": false
+    },
+    {
+      "name": "Renewable Energy Project Management",
+      "sector": "Energy",
+      "day": 800,
+      "demand": 5,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Carbon Accounting & ESG Reporting",
+      "sector": "Energy",
+      "day": 750,
+      "demand": 5,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Grid Integration",
+      "sector": "Energy",
+      "day": 850,
+      "demand": 4,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "HSE / Health & Safety Management",
+      "sector": "Construction",
+      "day": 650,
+      "demand": 5,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Quantity Surveying",
+      "sector": "Construction",
+      "day": 700,
+      "demand": 4,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "BIM Coordination",
+      "sector": "Construction",
+      "day": 650,
+      "demand": 4,
+      "ai_resistance": 3,
+      "lead": false
+    },
+    {
+      "name": "Clinical Governance",
+      "sector": "Healthcare",
+      "day": 750,
+      "demand": 5,
+      "ai_resistance": 5,
+      "lead": false
+    },
+    {
+      "name": "Medical Device Regulation",
+      "sector": "Healthcare",
+      "day": 850,
+      "demand": 5,
+      "ai_resistance": 5,
+      "lead": false
+    },
+    {
+      "name": "Health Informatics",
+      "sector": "Healthcare",
+      "day": 800,
+      "demand": 4,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Lean Manufacturing / Six Sigma",
+      "sector": "Manufacturing",
+      "day": 700,
+      "demand": 4,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Industrial Automation",
+      "sector": "Manufacturing",
+      "day": 800,
+      "demand": 5,
+      "ai_resistance": 4,
+      "lead": false
+    },
+    {
+      "name": "Defence Procurement",
+      "sector": "Defence",
+      "day": 900,
+      "demand": 5,
+      "ai_resistance": 5,
+      "lead": false
+    }
+  ]
+}

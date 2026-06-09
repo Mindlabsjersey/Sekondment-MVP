@@ -1,3 +1,5 @@
+> **Start with CURRENT_STATE.md** — the accurate, up-to-date build inventory and direction.
+
 # DEVIN.md — Autonomous Agent Handoff for Sekondment
 
 You are picking up a **complete, substantial B2B marketplace** built across many
@@ -147,3 +149,10 @@ MODULE_ACCESS role matrix; the owner role can never be restricted by other staff
 1. `npx tsc --noEmit` clean. 2. `npm run build` succeeds. 3. The core loop still
 works. 4. No secret committed. 5. ROADMAP.md checkbox updated. 6. Migrations (if any)
 run in order without error and are idempotent where possible.
+
+## BUILD JOURNAL — MANDATORY
+Two files must be kept current EVERY session (this is part of the build, not optional):
+- **BUILD_LOG.md** — append a dated entry each session (append-only; never edit past
+  entries). What changed, what you verified, new gaps, migrations touched.
+- **KNOWN_GAPS.md** — move items to RESOLVED when verified live; add new gaps found.
+These preserve continuity across tools (Claude/Cascade/Devin) so nothing is lost.

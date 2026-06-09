@@ -1,3 +1,5 @@
+> **For current build inventory, see CURRENT_STATE.md** (this file may contain older counts; strategy/detail here is still useful).
+
 # BUILD MANIFEST — Sekondment (complete app inventory)
 
 This is the canonical "what exists" reference. Sekondment is a **complete B2B
