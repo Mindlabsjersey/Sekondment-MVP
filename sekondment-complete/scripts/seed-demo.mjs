@@ -19,8 +19,16 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
-import { config } from 'dotenv';
-config({ path: '.env.local' });
+import { readFileSync } from 'node:fs';
+
+// Minimal .env.local loader (no extra deps — matches apply-migrations.mjs).
+try {
+  const raw = readFileSync('.env.local', 'utf8');
+  for (const line of raw.split(/\r?\n/)) {
+    const m = line.match(/^\s*(?:export\s+)?([A-Z0-9_]+)\s*=\s*(.*)$/);
+    if (m && !process.env[m[1]]) process.env[m[1]] = m[2].trim().replace(/^["']|["']$/g, '');
+  }
+} catch { /* ignore */ }
 
 const URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -127,25 +135,27 @@ async function main() {
   console.log(`  ✓ ${Object.keys(bizIds).length} businesses`);
 
   // ── OPPORTUNITIES ───────────────────────────────────────────────────────
+  // outcome must be a valid outcome_type enum; the sentence goes in description.
   const opps = [
     { biz: 'lumio', title: 'Implement Stripe Connect for our marketplace', industry: 'Technology',
-      outcome: 'Marketplace payments live with escrow + split payouts', min: 8000, max: 15000, mode: 'remote', exp: ['stripe-connect-implementation'] },
+      oc: 'launch_product', desc: 'Marketplace payments live with escrow + split payouts', min: 8000, max: 15000, mode: 'remote', exp: ['stripe-connect-implementation'] },
     { biz: 'northbank', title: 'AML review & KYC onboarding overhaul', industry: 'Finance',
-      outcome: 'Compliant AML/KYC process documented and implemented', min: 10000, max: 20000, mode: 'hybrid', exp: ['aml-review', 'kyc-review'] },
+      oc: 'improve_compliance', desc: 'Compliant AML/KYC process documented and implemented', min: 10000, max: 20000, mode: 'hybrid', exp: ['aml-review', 'kyc-review'] },
     { biz: 'meridian', title: 'Trust administration interim support', industry: 'Finance',
-      outcome: 'Trust admin backlog cleared, processes documented', min: 6000, max: 12000, mode: 'onsite', exp: ['trust-administration'] },
+      oc: 'improve_operations', desc: 'Trust admin backlog cleared, processes documented', min: 6000, max: 12000, mode: 'on_site', exp: ['trust-administration'] },
     { biz: 'brightwave', title: 'Scale paid acquisition (Meta + Google)', industry: 'Marketing',
-      outcome: 'CAC down 20%, ROAS up across channels', min: 4000, max: 9000, mode: 'remote', exp: ['meta-ads-lead-generation'] },
+      oc: 'improve_marketing', desc: 'CAC down 20%, ROAS up across channels', min: 4000, max: 9000, mode: 'remote', exp: ['meta-ads-lead-generation'] },
     { biz: 'lumio', title: 'ISO27001 readiness', industry: 'Technology',
-      outcome: 'ISO27001 implementation plan + controls in place', min: 12000, max: 25000, mode: 'remote', exp: ['iso27001-implementation'] },
+      oc: 'improve_compliance', desc: 'ISO27001 implementation plan + controls in place', min: 12000, max: 25000, mode: 'remote', exp: ['iso27001-implementation'] },
   ];
   const oppIds = [];
   for (const o of opps) {
     if (!bizIds[o.biz]) continue;
-    const { data: opp } = await db.from('opportunities').insert({
-      business_id: bizIds[o.biz], title: o.title, description: o.outcome, desired_outcome: o.outcome,
+    const { data: opp, error: oppErr } = await db.from('opportunities').insert({
+      business_id: bizIds[o.biz], title: o.title, description: o.desc, desired_outcome: o.oc,
       industry: o.industry, budget_min: o.min, budget_max: o.max, work_mode: o.mode, status: 'open',
     }).select('id').single();
+    if (oppErr) console.error('  opportunity failed:', o.title, oppErr.message);
     if (opp) {
       oppIds.push(opp.id);
       for (const slug of o.exp) {
