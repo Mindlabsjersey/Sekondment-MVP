@@ -16,14 +16,17 @@ export type Extraction = {
   suggested_rate?: { min: number; max: number; currency: string } | null;
 };
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const MODEL = process.env.OPENAI_MODEL ?? 'gpt-4o-mini';
+const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+const MODEL = process.env.ANTHROPIC_MODEL ?? 'claude-3-opus-20240229';
+
+console.log('[CV AI] ANTHROPIC_API_KEY present?', !!ANTHROPIC_API_KEY, 'Length:', ANTHROPIC_API_KEY?.length);
 
 export async function extractExpertiseFromText(text: string): Promise<
   { ok: true; extracted: Extraction; charCount: number } | { ok: false; error: string }
 > {
-  if (!OPENAI_API_KEY) {
-    return { ok: false, error: 'CV extraction is not configured (missing OPENAI_API_KEY).' };
+  if (!ANTHROPIC_API_KEY) {
+    console.error('[CV AI] Missing ANTHROPIC_API_KEY');
+    return { ok: false, error: 'CV extraction is not configured (missing ANTHROPIC_API_KEY).' };
   }
   if (!text || text.trim().length < 20) {
     return { ok: false, error: 'Not enough text to extract from.' };
@@ -55,26 +58,29 @@ ${text.slice(0, 8000)}
 `;
 
   try {
-    const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENAI_API_KEY}`,
+        'x-api-key': ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
         model: MODEL,
+        max_tokens: 4096,
         messages: [{ role: 'user', content: prompt }],
         temperature: 0.2,
-        response_format: { type: 'json_object' },
       }),
     });
 
     if (!res.ok) {
-      return { ok: false, error: `AI service error: ${res.status}` };
+      const errorBody = await res.text().catch(() => 'No error body');
+      console.error('[CV AI] API error:', res.status, errorBody);
+      return { ok: false, error: `AI service error: ${res.status} - ${errorBody.slice(0, 200)}` };
     }
 
     const json = await res.json();
-    const content = json?.choices?.[0]?.message?.content;
+    const content = json?.content?.[0]?.text;
     if (!content) {
       return { ok: false, error: 'No extraction returned from AI.' };
     }
