@@ -1,6 +1,8 @@
 'use server';
 
 import { extractExpertiseFromText } from './cv-ai-actions';
+import mammoth from 'mammoth';
+import pdf from 'pdf-parse/lib/pdf-parse.js';
 
 /* CV file → text → AI-powered structured extraction.
    Accepts plain text / .txt / .md directly. For PDF/DOCX we attempt extraction if
@@ -18,18 +20,10 @@ export async function extractFromCvFile(formData: FormData) {
     if (name.endsWith('.txt') || name.endsWith('.md') || file.type.startsWith('text/')) {
       text = await file.text();
     } else if (name.endsWith('.pdf') || file.type === 'application/pdf') {
-      // Attempt PDF text extraction if a parser is installed. Degrade gracefully.
       try {
         const buf = Buffer.from(await file.arrayBuffer());
-        // pdf-parse is optional; if absent, we fall through to the paste prompt.
-        // Variable specifier keeps it out of static type-resolution so the build
-        // stays green when the parser isn't installed (graceful degradation).
-        const pdfModule = 'pdf-parse';
-        const mod: any = await import(pdfModule).catch(() => null);
-        if (mod) {
-          const parsed = await (mod.default ?? mod)(buf);
-          text = parsed?.text ?? '';
-        }
+        const parsed = await pdf(buf);
+        text = parsed?.text ?? '';
       } catch { /* fall through */ }
       if (!text) {
         return { ok: false as const, error: 'Could not read this PDF automatically. Please paste the CV text instead — extraction works the same way.' };
@@ -37,12 +31,8 @@ export async function extractFromCvFile(formData: FormData) {
     } else if (name.endsWith('.docx')) {
       try {
         const buf = Buffer.from(await file.arrayBuffer());
-        const docxModule = 'mammoth';
-        const mammoth: any = await import(docxModule).catch(() => null);
-        if (mammoth) {
-          const r = await mammoth.extractRawText({ buffer: buf });
-          text = r?.value ?? '';
-        }
+        const r = await mammoth.extractRawText({ buffer: buf });
+        text = r?.value ?? '';
       } catch { /* fall through */ }
       if (!text) {
         return { ok: false as const, error: 'Could not read this Word file automatically. Please paste the CV text instead.' };
