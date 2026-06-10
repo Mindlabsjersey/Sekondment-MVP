@@ -6,7 +6,7 @@ import ProfileEditor from './ProfileEditor';
 import LogoUpload from './LogoUpload';
 import VerificationUpload from './VerificationUpload';
 import ExpertisePicker from './ExpertisePicker';
-import CVImport from './CVImport';
+import CVParserPanel from '@/components/CVParserPanel';
 import EmployerSettings from './EmployerSettings';
 
 export default async function SettingsPage() {
@@ -80,7 +80,9 @@ export default async function SettingsPage() {
           )}
           <ProfileEditor type={type} profile={profile} email={account.email} />
           {type === 'expert' && <ExpertisePicker existing={expertiseTags} />}
-          {type === 'expert' && <CVImport />}
+          {type === 'expert' && profile?.id && (
+            <CVParserPanel expertId={profile.id} />
+          )}
           {type === 'business' && <EmployerSettings profile={profile} />}
           {type !== 'admin' && <VerificationUpload existing={verifDocs ?? []} />}
         </>
