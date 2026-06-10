@@ -25,9 +25,15 @@ export default function CVParserPanel({
   const [pasted, setPasted] = useState('');
   const [extracting, setExtracting] = useState(false);
   const [extraction, setExtraction] = useState<Extraction | null>(null);
+  const [addedSkillCount, setAddedSkillCount] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const BATCH_SIZE = 10;
+  const remainingSkills = extraction?.skills?.slice(addedSkillCount) ?? [];
+  const currentBatch = remainingSkills.slice(0, BATCH_SIZE);
+  const hasMoreSkills = remainingSkills.length > BATCH_SIZE;
 
   async function handleExtract() {
     setError(null);
@@ -56,7 +62,37 @@ export default function CVParserPanel({
     setExtraction(res.extracted);
   }
 
-  async function applyToProfile() {
+  async function applyBatch() {
+    if (!extraction || currentBatch.length === 0) return;
+    setSaving(true);
+    
+    // Apply only current batch
+    const batchExtraction = {
+      ...extraction,
+      skills: currentBatch,
+    };
+    
+    const res = await enhanceProfileFromExtraction(expertId, batchExtraction);
+    setSaving(false);
+    if (!res.ok) {
+      setError(res.error ?? 'Failed to apply.');
+      return;
+    }
+    
+    // Mark these skills as added
+    setAddedSkillCount(prev => prev + currentBatch.length);
+    onApplied?.();
+    
+    // If no more skills, reset extraction
+    if (addedSkillCount + currentBatch.length >= (extraction.skills?.length ?? 0)) {
+      setExtraction(null);
+      setAddedSkillCount(0);
+      setFile(null);
+      setPasted('');
+    }
+  }
+
+  async function applyAll() {
     if (!extraction) return;
     setSaving(true);
     const res = await enhanceProfileFromExtraction(expertId, extraction);
@@ -66,8 +102,8 @@ export default function CVParserPanel({
       return;
     }
     onApplied?.();
-    // Reset UI after successful apply
     setExtraction(null);
+    setAddedSkillCount(0);
     setFile(null);
     setPasted('');
   }
@@ -204,21 +240,23 @@ export default function CVParserPanel({
             </div>
           )}
 
-          {extraction.skills && extraction.skills.length > 0 && (
-            <div className="mb-3">
-              <p className="text-xs uppercase tracking-wide text-muted mb-1">Skills</p>
-              <div className="flex flex-wrap gap-1">
-                {extraction.skills.slice(0, 12).map((s) => (
-                  <span key={s} className="text-xs px-2 py-1 rounded-full bg-moss/10 text-moss">
+          {currentBatch.length > 0 && (
+            <div className="mb-4">
+              <p className="text-xs uppercase tracking-wide text-muted mb-2">
+                Skills ({addedSkillCount + 1}-{addedSkillCount + currentBatch.length} of {extraction.skills?.length})
+              </p>
+              <div className="flex flex-wrap gap-2 leading-relaxed">
+                {currentBatch.map((s) => (
+                  <span key={s} className="text-xs px-2 py-1.5 rounded-full bg-moss/10 text-moss mb-1">
                     {s}
                   </span>
                 ))}
-                {extraction.skills.length > 12 && (
-                  <span className="text-xs px-2 py-1 rounded-full bg-paper-2">
-                    +{extraction.skills.length - 12} more
-                  </span>
-                )}
               </div>
+              {hasMoreSkills && (
+                <p className="text-xs text-muted mt-2">
+                  +{remainingSkills.length - BATCH_SIZE} more skills after adding these
+                </p>
+              )}
             </div>
           )}
 
@@ -243,18 +281,31 @@ export default function CVParserPanel({
             </div>
           )}
 
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <button
               type="button"
-              onClick={applyToProfile}
-              disabled={saving}
+              onClick={applyBatch}
+              disabled={saving || currentBatch.length === 0}
               className="btn btn-primary"
             >
-              {saving ? 'Applying…' : 'Use this to fill my profile'}
+              {saving ? 'Adding…' : `Add ${currentBatch.length} skills to profile`}
             </button>
+            {hasMoreSkills && (
+              <button
+                type="button"
+                onClick={applyAll}
+                disabled={saving}
+                className="btn btn-secondary"
+              >
+                Add all {extraction.skills?.length} skills
+              </button>
+            )}
             <button
               type="button"
-              onClick={() => setExtraction(null)}
+              onClick={() => {
+                setExtraction(null);
+                setAddedSkillCount(0);
+              }}
               className="btn btn-ghost"
             >
               Cancel

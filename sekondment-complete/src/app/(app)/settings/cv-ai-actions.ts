@@ -36,7 +36,7 @@ export async function extractExpertiseFromText(text: string): Promise<
 
 - headline: A concise professional title (e.g., "Fractional CTO", "ML Engineer")
 - summary: 1-2 sentence professional summary
-- skills: Array of 10-15 specific technical/professional skills. Extract EVERY skill mentioned: technologies, tools, frameworks, methodologies, soft skills. Be comprehensive.
+- skills: Array of ALL technical/professional skills found in the CV. Extract EVERY skill mentioned: technologies, tools, frameworks, programming languages, platforms, methodologies, soft skills, certifications. Be exhaustive - include as many as possible.
 - achievements: Array of 3-5 concrete achievements with metrics
 - seniority: One of [entry, mid, senior, lead, executive]
 - industries: Array of industries worked in (max 5)
